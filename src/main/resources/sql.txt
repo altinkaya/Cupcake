@@ -1,0 +1,45 @@
+-- Create the cupcake_bottom table
+CREATE TABLE cupcake_bottom (
+    id SERIAL PRIMARY KEY,
+    flavor VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL
+);
+
+-- Create the cupcake_top table
+CREATE TABLE cupcake_top (
+    id SERIAL PRIMARY KEY,
+    flavor VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL
+);
+
+-- Create the coustomer table
+CREATE TABLE coustomer (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    balance DECIMAL(10, 2) NOT NULL
+);
+
+-- Create the Admin table
+CREATE TABLE Admin (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+-- Create the ordersdetails table with foreign keys to cupcake_top and cupcake_bottom
+CREATE TABLE ordersdetails (
+    id SERIAL PRIMARY KEY,
+    ordernr INT NOT NULL,
+    top_id INT REFERENCES cupcake_top(id),
+    bottom_id INT REFERENCES cupcake_bottom(id),
+    amount INT NOT NULL
+);
+
+-- Create the orders table with a foreign key to the coustomer table
+CREATE TABLE orders (
+    order_nr SERIAL PRIMARY KEY,
+    customer_id INT REFERENCES coustomer(id),
+    status VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL
+);

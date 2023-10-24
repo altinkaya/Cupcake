@@ -26,6 +26,7 @@ public class Main
         }).start(7070);
 
         // Routing
+
         app.get("/", ctx -> ctx.render("index.html"));
         app.post("/login", ctx -> UserController.login(ctx, connectionPool));
         app.get("/admin", ctx -> ctx.render("admin.html"));

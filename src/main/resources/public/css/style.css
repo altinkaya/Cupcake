@@ -1,0 +1,57 @@
+
+/* Nav-bar*/
+#nav{
+    background-color: #dfdfdf;
+    padding: 10px;
+    font-size: 2.0rem;
+}
+
+#main-menu{
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+#content{
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/*Flex styling af dropdowns*/
+#dropdowns{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+@media screen and (max-width: 640px){
+    #dropdowns{
+        flex-direction: column;
+    }
+    #main-menu{
+        flex-direction: column;
+    }
+}
+
+#dropdowns select, #dropdowns button{
+    font-size: 1.5rem;
+    padding: 5px;
+    margin: 10px;
+    flex-grow: 1;
+}
+
+/*Text style*/
+
+h1{
+    font-size: 5.0rem;
+
+}
+
+h2{
+    font-size: 3.0rem;
+}
+
+p{
+    font-size: 1rem;
+}
+

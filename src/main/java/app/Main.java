@@ -1,8 +1,6 @@
 package app;
 
 import app.config.ThymeleafConfig;
-import app.controllers.GroupMController;
-import app.controllers.UserController;
 import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
@@ -28,12 +26,7 @@ public class Main
 
         // Routing
 
-        app.get("/", ctx ->  ctx.render("index.html"));
-        // user routes
-        app.post("/login", ctx -> UserController.login(ctx, connectionPool));
-        app.get("/createuser", ctx -> ctx.render("createuser.html"));
-        app.post("/createuser",ctx -> UserController.createuser(ctx, connectionPool ));
-        app.get("/logout", ctx -> UserController.logout(ctx));
+
 
     }
 }

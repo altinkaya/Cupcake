@@ -7,38 +7,54 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 public class CupcakeMapper {
 
-    public static Cupcake createCupcake(String topFlavor, String bottomFlavor, int amount, ConnectionPool connectionPool) throws DatabaseException {
-        int price = 0;
-        String sqlTop = "SELECT price FROM cupcake_top WHERE flavor=?";
-        String sqlBottom = "SELECT price FROM cupcake_bottom WHERE flavor=?";
+        public static HashMap<String,Integer> topFlavors(ConnectionPool connectionPool) throws DatabaseException {
+            HashMap<String, Integer> topFlavors = new HashMap<>();
+            String sql = "SELECT * FROM cupcake_top";
+            try (Connection connection = connectionPool.getConnection()) {
+                try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
-        try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(sqlTop)) {
-                ps.setString(1, topFlavor);
-                ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    price += rs.getInt("top_price");
-                } else {
-                    throw new DatabaseException("Fejl i oprrettelse af cupcake. Prøv igen.");
+                    ResultSet rs = ps.executeQuery();
+                    while (rs.next()) {
+                            String topFlavor = rs.getString("flavor");
+                            int topFlavorPrice = rs.getInt("price");
+                            topFlavors.put(topFlavor, topFlavorPrice);
+                        }
+                    }
+                    return topFlavors;
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
                 }
+
             }
-            try (PreparedStatement ps = connection.prepareStatement(sqlBottom)) {
-                ps.setString(1, bottomFlavor);
-                ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    price += rs.getInt("bottom_price");
-                } else {
-                    throw new DatabaseException("Fejl i oprrettelse af cupcake. Prøv igen.");
+
+            public static HashMap<String,Integer> bottomFlavors(ConnectionPool connectionPool) throws DatabaseException {
+                HashMap<String, Integer> bottomFlavors = new HashMap<>();
+                String sqlBottom = "SELECT * FROM cupcake_bottom";
+                try (Connection connection = connectionPool.getConnection()) {
+                    try (PreparedStatement ps = connection.prepareStatement(sqlBottom)) {
+                        ResultSet rs = ps.executeQuery();
+                            while (rs.next()) {
+                                String bottomFlavor = rs.getString("flavor");
+                                int bottomFlavorPrice = rs.getInt("price");
+                                bottomFlavors.put(bottomFlavor, bottomFlavorPrice);
+                            }
+                        }
+                        return bottomFlavors;
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
-            }
-            return new Cupcake(topFlavor, bottomFlavor, amount, price);
-        }
-        catch (SQLException e)
-        {
-            throw new RuntimeException(e);
-        }
-    }
+                public String generateDropdownsHTML(ConnectionPool connectionPool) throws DatabaseException {
+                    HashMap<String,Integer> topFlavors = topFlavors(connectionPool);
+                    HashMap<String,Integer> bottomFlavors = bottomFlavors(connectionPool);
+                    StringBuilder html = new StringBuilder("<form id=\"dropdowns\" action=\"cart.html\" method=\"get\">\n");
+                    html.append("<select name=\"topFlavor\">\n");
+                    
+
+
+                }
 }

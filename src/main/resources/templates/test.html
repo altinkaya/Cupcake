@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flavor Dropdowns</title>
+</head>
+<body>
+
+<div id="flavorDropdowns">
+<select id="flavorDropdown1" >
+        <option  th:each="top : ${#ctx.topFlavors}" th:value="${top.id}" th:text="${top.flavor + ' ' + top.price + ',-'}"></option>
+    </select>
+
+
+    <select id="flavorDropdown2">
+        <option  th:each="top : ${#ctx.bottomFlavors}" th:value="${bottom.id}" th:text="${bottom.flavor + ' ' + bottom.price + ',-'}"></option>
+    </select>
+
+</div>
+
+</body>
+</html>

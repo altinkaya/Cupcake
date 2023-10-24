@@ -13,4 +13,15 @@ public Basket() {
     public void addToBasket(Cupcake cupcake) {
         basket.add(cupcake);
     }
+
+    public void removeFromBasket(Cupcake cupcake) {
+        basket.remove(cupcake);
+    }
+
+    public List<Cupcake> getBasket() {
+        return basket;
+    }
+
+
+
 }

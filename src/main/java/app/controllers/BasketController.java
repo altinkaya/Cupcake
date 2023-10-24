@@ -21,7 +21,10 @@ public class BasketController {
         basket.addToBasket(cupcake);
         ctx.attribute("message", "Du har nu tilføjet en cupcake til din kurv");
         ctx.render("index.html");
-
+    }
+    public static void removeCupcakeFromBasket(Cupcake cupcake, Context ctx){
+        Basket basket = ctx.sessionAttribute("userBasket");
+        basket.removeFromBasket(cupcake);
 
     }
 

@@ -14,11 +14,13 @@ public class UserController
     {
         String name = ctx.formParam("username");
         String password = ctx.formParam("password");
+        String adminParam = ctx.formParam("admin");
+        Boolean status = Boolean.parseBoolean(adminParam);
         try
         {
             User user = UserMapper.login(name, password, connectionPool);
             ctx.sessionAttribute("currentUser", user);
-            ctx.attribute("message", "Du er nu logget ind");
+            ctx.attribute("message", "Du er nu logget ind "+user.getName()+" "+user.getStatus());
             ctx.render("index.html");
         }
         catch (DatabaseException e)

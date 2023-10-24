@@ -14,18 +14,13 @@ public class BasketController {
         String topFlavor = ctx.formParam("topFlavor");
         String bottomFlavor = ctx.formParam("bottomFlavor");
         int amount = Integer.parseInt(ctx.formParam("amount"));
+        int price = Integer.parseInt(ctx.formParam("price"));
 
-        try {
-        Cupcake cupcake = CupcakeMapper.createCupcake(topFlavor, bottomFlavor, amount, connectionPool);
+        Cupcake cupcake = new Cupcake(topFlavor, bottomFlavor, amount, price);
         Basket basket = ctx.sessionAttribute("userBasket");
         basket.addToBasket(cupcake);
         ctx.attribute("message", "Du har nu tilføjet en cupcake til din kurv");
         ctx.render("index.html");
-        } catch (DatabaseException e) {
-            ctx.attribute("message", e.getMessage());
-            ctx.render("index.html");
-        }
-
 
 
     }

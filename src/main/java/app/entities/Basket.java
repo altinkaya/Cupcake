@@ -6,7 +6,8 @@ import java.util.List;
 public class Basket {
     private static List<Cupcake> basket;
 
-public Basket() {
+    public Basket() {
+
         this.basket = new ArrayList<>();
     }
 
@@ -23,5 +24,10 @@ public Basket() {
     }
 
 
+    @Override
+    public String toString() {
+        return "Basket{" + basket + "}";
+
+    }
 
 }

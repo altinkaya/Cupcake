@@ -7,11 +7,11 @@ public class Cupcake {
     private int amount;
     private int price;
 
-    public Cupcake(String topFlavor, String bottomFlavor, int amount, int price) {
-        this.topFlavor = topFlavor;
-        this.bottomFlavor = bottomFlavor;
+    public Cupcake(CupcakeTop top, CupcakeBottom bottom, int amount) {
+        this.topFlavor = top.getFlavor();
+        this.bottomFlavor = bottom.getFlavor();
         this.amount = amount;
-        this.price = price;
+        this.price = (top.getPrice() + bottom.getPrice()) * amount;
     }
 
     public String getTopFlavor() {
@@ -32,10 +32,12 @@ public class Cupcake {
 
     @Override
     public String toString() {
-        return "Cupcake{" + "topFlavor=" + topFlavor +
-                ", bottomFlavor=" + bottomFlavor +
+        return "Cupcake{" +
+                "topFlavor='" + topFlavor + '\'' +
+                ", bottomFlavor='" + bottomFlavor + '\'' +
                 ", amount=" + amount +
-                ", price=" + price + '}';
+                ", price=" + price +
+                '}';
     }
 
 

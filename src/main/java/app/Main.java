@@ -1,6 +1,7 @@
 package app;
 
 import app.config.ThymeleafConfig;
+import app.controllers.BasketController;
 import app.controllers.CupcakeController;
 import app.controllers.UserController;
 import app.persistence.ConnectionPool;
@@ -34,6 +35,8 @@ public class Main
         app.post("/login", ctx -> UserController.login(ctx, connectionPool));
         app.get("/admin", ctx -> ctx.render("admin.html"));
         app.get("/test", ctx -> CupcakeController.dropDowns(ctx, connectionPool));
+        app.get("/addToBasket", ctx -> BasketController.addCupcakeToBasket(ctx, connectionPool));
+
 
     }
 }

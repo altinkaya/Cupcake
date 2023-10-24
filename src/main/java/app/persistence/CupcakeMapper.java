@@ -1,6 +1,7 @@
 package app.persistence;
 
 import app.entities.Cupcake;
+import app.entities.CupcakeBottom;
 import app.entities.CupcakeTop;
 import app.exceptions.DatabaseException;
 import io.javalin.http.Context;
@@ -34,16 +35,17 @@ public class CupcakeMapper {
 
     }
 
-    public static HashMap<String, Integer> bottomFlavors(ConnectionPool connectionPool) throws DatabaseException {
-        HashMap<String, Integer> bottomFlavors = new HashMap<>();
-        String sqlBottom = "SELECT * FROM cupcake_bottom";
+    public static HashMap<Integer, CupcakeBottom> bottomFlavors(ConnectionPool connectionPool) throws DatabaseException {
+        HashMap<Integer, CupcakeBottom> bottomFlavors = new HashMap<>();
+        String sql = "SELECT * FROM cupcake_bottom";
         try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(sqlBottom)) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
-                    String bottomFlavor = rs.getString("flavor");
-                    int bottomFlavorPrice = rs.getInt("price");
-                    bottomFlavors.put(bottomFlavor, bottomFlavorPrice);
+                    int id = rs.getInt("id");
+                    String topFlavor = rs.getString("flavor");
+                    int topFlavorPrice = rs.getInt("price");
+                    bottomFlavors.put(id, new CupcakeBottom(id, topFlavor, topFlavorPrice));
                 }
             }
             return bottomFlavors;

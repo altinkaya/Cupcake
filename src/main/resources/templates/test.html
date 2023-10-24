@@ -9,14 +9,13 @@
 <body>
 
 <div id="flavorDropdowns">
-<select id="flavorDropdown1" >
+    <select id="flavorDropdown1" >
         <option  th:each="top : ${#ctx.topFlavors}" th:value="${top.id}" th:text="${top.flavor + ' ' + top.price + ',-'}"></option>
     </select>
-
-
     <select id="flavorDropdown2">
-        <option  th:each="top : ${#ctx.bottomFlavors}" th:value="${bottom.id}" th:text="${bottom.flavor + ' ' + bottom.price + ',-'}"></option>
+        <option  th:each="bottom : ${#ctx.bottomFlavors}" th:value="${bottom.id}" th:text="${bottom.flavor + ' ' + bottom.price + ',-'}"></option>
     </select>
+    <button type="submit" formaction="/addToBasket">Tilføj til kurv</button>
 
 </div>
 

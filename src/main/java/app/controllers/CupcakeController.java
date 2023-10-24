@@ -1,11 +1,10 @@
 package app.controllers;
 
+import app.entities.CupcakeBottom;
 import app.entities.CupcakeTop;
-import app.entities.User;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
 import app.persistence.CupcakeMapper;
-import app.persistence.UserMapper;
 import io.javalin.http.Context;
 
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ public class CupcakeController {
 
     public static void dropDowns(Context ctx, ConnectionPool connectionPool)
     {
-
         try
         {
             HashMap<Integer, CupcakeTop> topFlavors = CupcakeMapper.topFlavors(connectionPool);
@@ -32,9 +30,9 @@ public class CupcakeController {
         }
         try
         {
-            HashMap<Integer, CupcakeTop> bottomFlavors = CupcakeMapper.topFlavors(connectionPool);
-            List<CupcakeTop> bottomlist = new ArrayList<>(bottomFlavors.values());
-            ctx.attribute("topFlavors", bottomlist);
+            HashMap<Integer, CupcakeBottom> bottomFlavors = CupcakeMapper.bottomFlavors(connectionPool);
+            List<CupcakeBottom> bottomlist = new ArrayList<>(bottomFlavors.values());
+            ctx.attribute("bottomFlavors", bottomlist);
             ctx.render("test.html");
 
         }

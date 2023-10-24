@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="lifehack_fall_2023" />
         <module name="lifehack" />
+        <module name="Cupcake" />
       </profile>
     </annotationProcessing>
   </component>

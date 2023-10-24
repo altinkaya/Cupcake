@@ -1,0 +1,34 @@
+@startuml
+
+title Domain Model
+
+Main -down-> UserMapper
+Main -down-> UserController
+Main -down-> ThymeleafConfig
+Main -down-> ConnectionPool
+Main -down-> DatabaseException
+
+UserController --|> UserMapper
+UserController --|> Orders
+
+Orders --|> OrderDetails
+Orders --|> User
+
+Orders --|> CupcakeTop
+Orders --|> CupcakeBottom
+
+UserController -up-> User
+
+class UserMapper
+class ConnectionPool
+class DatabaseException
+class User
+class UserController
+class ThymeleafConfig
+class Orders
+class OrderDetails
+class CupcakeTop
+class CupcakeBottom
+
+
+@enduml

@@ -1,10 +1,14 @@
 package app.entities;
 
+import java.util.List;
+
 public class User
 {
     private int id;
     private String name;
     private String password;
+
+    List<Cupcake> basket;
 
     public User(int id, String name, String password)
     {

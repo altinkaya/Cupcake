@@ -23,8 +23,7 @@ CREATE TABLE users (
 
 -- Create the ordersdetails table with foreign keys to cupcake_top and cupcake_bottom
 CREATE TABLE ordersdetails (
-    id SERIAL PRIMARY KEY,
-    ordernr INT NOT NULL,
+    ordernr SERIAL PRIMARY KEY,
     top_id INT REFERENCES cupcake_top(id),
     bottom_id INT REFERENCES cupcake_bottom(id),
     amount INT NOT NULL
@@ -32,8 +31,36 @@ CREATE TABLE ordersdetails (
 
 -- Create the orders table with a foreign key to the users table
 CREATE TABLE orders (
-    order_nr SERIAL PRIMARY KEY,
+    order_nr INT REFERENCES ordersdetails(ordernr),
     user_id INT REFERENCES users(id),
     status VARCHAR(255) NOT NULL,
     price DECIMAL(10, 2) NOT NULL
 );
+-- Insert data into the cupcake_bottom table
+INSERT INTO cupcake_bottom (flavor, price) VALUES
+    ('Chocolate', 5.00),
+    ('Vanilla', 5.00),
+    ('Nutmeg', 5.00),
+    ('Pistachio', 6.00),
+    ('Almond', 7.00);
+
+
+-- Insert data into the cupcake_top table
+INSERT INTO cupcake_top (flavor, price) VALUES
+    ('Chocolate', 5.00),
+    ('Blueberry', 5.00),
+    ('Raspberry', 5.00),
+    ('Crispy', 6.00),
+    ('Strawberry', 6.00),
+    ('Rum/Raisin', 7.00),
+    ('Orange', 8.00),
+    ('Lemon', 8.00),
+    ('Blue cheese', 9.00);
+
+
+-- Insert simple data for customers
+INSERT INTO users (email, password, balance, admin) VALUES
+    ('admin', '1234', 200.00, TRUE),
+    ('morten@gmail.com', '1234', 200.00, FALSE),
+    ('mounier@gmail.com', '1234', 50.00, FALSE),
+    ('mustafa@gmail.com', '1234', 75.00, FALSE);

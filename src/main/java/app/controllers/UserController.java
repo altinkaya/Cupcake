@@ -1,5 +1,6 @@
 package app.controllers;
 
+import app.entities.Basket;
 import app.entities.User;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
@@ -18,6 +19,8 @@ public class UserController
         {
             User user = UserMapper.login(name, password, connectionPool);
             ctx.sessionAttribute("currentUser", user);
+            Basket basket = new Basket();
+            ctx.sessionAttribute("userBasket", basket);
             ctx.attribute("message", "Du er nu logget ind");
             ctx.render("index.html");
         }

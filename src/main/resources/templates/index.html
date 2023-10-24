@@ -26,17 +26,18 @@
         <form id="dropdowns" action="cart.html" method="get">
             <select name="bottom" id="bottom">
                 <option value="0">Vælg bund</option>
-                <option value="1">Chokolade</option>
-                <option value="2">Vanilje</option>
-                <option value="3">Jordbær</option>
-                <option value="4">Citron</option>
+                <option value="Chocolate">Chokolade 5,-</option>
+                <option value="Vanilla">Vanilje 5,-</option>
+                <option value="Nutmeg">Muskatnød 5,-</option>
+                <option value="Pistachio">Pistacie 6,-</option>
+                <option value="Almond">Mandel 7,-</option>
             </select>
             <select name="top" id="top">
                 <option value="0">Vælg top</option>
-                <option value="1">Chokolade</option>
-                <option value="2">Vanilje</option>
-                <option value="3">Jordbær</option>
-                <option value="4">Citron</option>
+                <option value="Chocolate">Chokolade 5,-</option>
+                <option value="Blueberry">Vanilje 5,-</option>
+                <option value="Raspberry">Jordbær 5,-</option>
+                <option value="Crispy">Krisp 6,-</option>
             </select>
             <select name="antal" id="antal">
                 <option value="0">Vælg antal</option>
@@ -47,7 +48,7 @@
             </select>
 
 
-            <button type="submit">Læg i kurv</button>
+            <button type="submit" formaction="/addCupcakeToBasket">Læg i kurv</button>
         </form>
 
     </div>

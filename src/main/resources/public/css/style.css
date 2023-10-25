@@ -1,57 +1,87 @@
-
-/* Nav-bar*/
-#nav{
-    background-color: #dfdfdf;
+/* Navbar */
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #D3D3D3;
     padding: 10px;
-    font-size: 2.0rem;
+    border-radius: 5px;
 }
 
-#main-menu{
-    list-style: none;
+#nav a {
+    text-decoration: none;
+    color: grey;
+    font-weight: bold;
+}
+
+#nav a:hover {
+    color: black;
+}
+
+#nav-left {
     display: flex;
-    gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 10px;
 }
 
-#content{
-    padding: 20px;
-    min-height: 100vh;
+#nav-right {
+    margin-left: auto; /* Push to the right */
 }
 
-/*Flex styling af dropdowns*/
-#dropdowns{
+#nav-right a {
+    margin-left: 10px; /* Add some spacing between "iodj@kfj.dk" and "Log ud" */
+
+}
+#log-out-btn {
+    margin-left: 5px;
+}
+
+#log-out-btn a {
+    padding-right: 7px;
+}
+
+#content {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    background-color: #D3D3D3;
+    padding: 50px;
+    border-radius: 5px;
+}
+
+h1 {
+    font-size: 60px;
+    margin-top: -10px;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+#atc-btn {
+    background-color: #007BFF; /* Set your desired background color */
     display: flex;
-    flex-direction: row;
-    gap: 10px;
+    align-items: center;
+    color: white; /* Set the text color */
+    border: none;
+    cursor: pointer;
+    font-size: 16px; /* Adjust the font size to control text size */
+    border-radius: 5px;
+    margin: 20px 55px 20px auto;
+    padding: 10px 20px 10px 20px;
 }
 
-@media screen and (max-width: 640px){
-    #dropdowns{
-        flex-direction: column;
-    }
-    #main-menu{
-        flex-direction: column;
-    }
+#atc-btn:hover {
+    background-color: #0069D9;
 }
 
-#dropdowns select, #dropdowns button{
-    font-size: 1.5rem;
-    padding: 5px;
-    margin: 10px;
-    flex-grow: 1;
+/* Add margins to create space between form elements */
+#dropdowns select {
+    margin-bottom: 10px; /* Adjust the margin as needed for the desired spacing */
+    margin-right: 40px;
+    width: 30%; /* Set the desired width */
+    height: 40px; /* Set the desired height */
+    border-radius: 10px;
+    padding-left: 5px;
 }
-
-/*Text style*/
-
-h1{
-    font-size: 5.0rem;
-
-}
-
-h2{
-    font-size: 3.0rem;
-}
-
-p{
-    font-size: 1rem;
-}
-

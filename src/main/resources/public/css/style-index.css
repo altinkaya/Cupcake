@@ -1,0 +1,49 @@
+.container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    background-color: #F5F5F5;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.login-box {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    background-color: white;
+    padding: 20px 60px 20px 60px;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.2); /* Add shadow here */
+}
+
+h2 {
+    font-size: 50px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    font-size: 16px; /* Adjust the font size to your preference */
+    padding: 5px; /* Adjust the padding to control the height */
+    height: 20px; /* Adjust the height to make the input fields taller */
+    border-radius: 5px;
+    border: 2px solid grey;
+    margin-top: 10px;
+}
+
+#login-btn {
+    background-image: linear-gradient(to bottom right, #915CC1, #3C1460);
+    display: flex;
+    align-items: center;
+    color: white; /* Set the text color */
+    border: none;
+    cursor: pointer;
+    font-size: 16px; /* Adjust the font size to control text size */
+    border-radius: 5px;
+    margin: 20px 55px 20px auto;
+    padding: 10px 20px 10px 20px;
+}

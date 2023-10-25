@@ -5,10 +5,7 @@ import app.entities.CupcakeTop;
 import app.exceptions.DatabaseException;
 
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashMap;
 
 public class CupcakeMapper {
@@ -52,5 +49,107 @@ public class CupcakeMapper {
             throw new RuntimeException(e);
         }
     }
+
+
+
+    public static void addtop(String flavor, String price, ConnectionPool connectionPool) throws DatabaseException
+    {
+        String sql = "insert into \"cupcake_top\" (flavor, price) values (?,?)";
+
+        try (Connection connection = connectionPool.getConnection())
+        {
+            try (PreparedStatement ps = connection.prepareStatement(sql))
+            {
+                ps.setString(1, flavor);
+                ps.setInt(2, Integer.parseInt(price));
+
+                int rowsAffected =  ps.executeUpdate();
+                if (rowsAffected != 1)
+                {
+                    throw new DatabaseException("Fejl ved oprettelse af ny variant");
+                }
+            }
+        }
+        catch (SQLException e)
+        {
+            String msg = "Der er sket en fejl. Prøv igen";
+            if (e.getMessage().startsWith("ERROR: duplicate key value "))
+            {
+                msg = "denne variant findes allrede";
+            }
+
+            throw new DatabaseException(msg);
+        }
+    }
+
+    public static void addbottom(String flavor, String price, ConnectionPool connectionPool) throws DatabaseException
+    {
+        String sql = "insert into \"cupcake_bottom\" (flavor, price) values (?,?)";
+
+        try (Connection connection = connectionPool.getConnection())
+        {
+            try (PreparedStatement ps = connection.prepareStatement(sql))
+            {
+                ps.setString(1, flavor);
+                ps.setInt(2, Integer.parseInt(price));
+
+                int rowsAffected =  ps.executeUpdate();
+                if (rowsAffected != 1)
+                {
+                    throw new DatabaseException("Fejl ved oprettelse af ny variant");
+                }
+            }
+        }
+        catch (SQLException e)
+        {
+            String msg = "Der er sket en fejl. Prøv igen";
+            if (e.getMessage().startsWith("ERROR: duplicate key value "))
+            {
+                msg = "denne variant findes allrede";
+            }
+
+            throw new DatabaseException(msg);
+        }
+    }
+
+
+    public static void updateTop(int topId, String flavor, int price, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "UPDATE cupcake_top SET flavor = ?, price = ? WHERE id = ?";
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, flavor);
+            ps.setInt(2, price);
+            ps.setInt(3, topId);
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 1) {
+                throw new DatabaseException("Fejl i opdatering af top");
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Fejl i opdatering af top");
+        }
+    }
+
+    public static void updateBottom(int topId, String flavor, int price, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "UPDATE cupcake_bottom SET flavor = ?, price = ? WHERE id = ?";
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, flavor);
+            ps.setInt(2, price);
+            ps.setInt(3, topId);
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 1) {
+                throw new DatabaseException("Fejl i opdatering af top");
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Fejl i opdatering af top");
+        }
+    }
+
+
+
 
 }

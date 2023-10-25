@@ -15,13 +15,14 @@ public class UserController
     {
         String name = ctx.formParam("username");
         String password = ctx.formParam("password");
-        String adminParam = ctx.formParam("admin");
-        Boolean status = Boolean.parseBoolean(adminParam);
-        try
+            try
+
         {
+            boolean status  = UserMapper.login(name, password, connectionPool).getStatus();
             User user = UserMapper.login(name, password, connectionPool);
             ctx.sessionAttribute("currentUser", user);
             ctx.sessionAttribute("username", user.getName());
+            ctx.sessionAttribute("status", user.getStatus());
             if (status)
             {
                 ctx.redirect("/admin");
@@ -54,7 +55,7 @@ public class UserController
             try
             {
                 UserMapper.createuser(name, password1,balance,admin, connectionPool);
-                ctx.attribute("message", "Du er nu oprette. Log pÃ¥ for at komme i gang.");
+                ctx.attribute("message", "Du er nu oprette. Log på for at komme i gang.");
                 ctx.render("index.html");
 
             }

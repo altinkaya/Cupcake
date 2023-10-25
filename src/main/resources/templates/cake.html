@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+  <img src="images/cupcakecolorlogo.png" alt="logo" width="100%">
+  <title>Admin - Olsker Cupcakes</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+  <div id="nav">
+    <ul class="admin-menu">
+      <li><a href="/users">Bruger</a></li>
+      <li><a href="/cake">Kager</a></li>
+      <li><a href="/ordre">Ordre</a></li>
+      <span th:text="${#ctx.username}" style="color: grey; margin-right: 10px;"></span>
+      <button id="log-out-btn"><a href="/">Log ud</a></button>
+    </ul>
+
+    <div class="indhold-box">
+
+      <input type="checkbox" id="toggle">
+      <label for="toggle">Tilføj nye varianter</label>
+      <div id="hiddenDiv" class="hidden">
+        <div class="centered-form">
+          <form method="post">
+            <div class="row">
+              <input type="text" name="flavor" placeholder="tilføj ny top smag"/>
+              <input type="text" name="price" placeholder="tilføj ny top pris"/>
+              <button type="submit" formaction="/addtop">Add</button>
+            </div>
+            <div class="row">
+              <input type="text" name="flavor_bottom" placeholder="tilføj ny bund smag"/>
+              <input type="text" name="price_bottom" placeholder="tilføj ny bund pris"/>
+              <button type="submit" formaction="/addbottom">Add</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <p class="errormessage" th:text="${#ctx.message}"></p>
+
+      <input type="checkbox" id="toggle2">
+      <label for="toggle2">Rediger top Varianter</label>
+      <div id="hiddenDiv2" class="hidden">
+        <div class="centered-form">
+          <form method="post">
+            <ul>
+              <li th:each="entry : ${topFlavors}">
+                <span th:text="${entry.value.flavor}"></span> - <span th:text="${entry.value.price}"></span>
+                <a href="javascript:void(0);" th:attr="data-top-id=${entry.key}, data-top-flavor=${entry.value.flavor}, data-top-price=${entry.value.price}" onclick="editTop(this)">Rediger</a>
+                <form method="post" th:action="@{'/delete-top/' + ${entry.key}}">
+                  <input type="submit" value="Slet" />
+                </form>
+              </li>
+            </ul>
+          </form>
+        </div>
+      </div>
+      <form method="post" action="/update-top" style="display: none;" id="edit-form">
+        <input type="hidden" name="top_id" id="edit-top-id" />
+        Flavor: <input type="text" name="top_name" id="edit-top-name" /><br>
+        Price: <input type="text" name="top_price" id="edit-top-price" /><br>
+        <input type="submit" value="Gem ændringer" />
+      </form>
+
+      <input type="checkbox" id="toggle3">
+      <label for="toggle3">Rediger bund Varianter</label>
+      <div id="hiddenDiv3" class="hidden">
+        <div class="centered-form">
+          <form method="post">
+            <ul>
+              <li th:each="entry : ${bottomFlavors}">
+                <span th:text="${entry.value.flavor}"></span> - <span th:text="${entry.value.price}"></span>
+                <a href="javascript:void(0);" th:attr="data-bottom-id=${entry.key}, data-bottom-flavor=${entry.value.flavor}, data-bottom-price=${entry.value.price}" onclick="editbottom(this)">Rediger</a>
+                <form method="post" th:action="@{'/delete-bottom/' + ${entry.key}}">
+                  <input type="submit" value="Slet" />
+                </form>
+              </li>
+            </ul>
+          </form>
+        </div>
+      </div>
+      <form method="post" action="/update-bottom" style="display: none;" id="edit-bottom">
+        <input type="hidden" name="bottom_id" id="edit-bottom-id" />
+        Flavor: <input type="text" name="bottom_name" id="edit-bottom-name" /><br>
+        Price: <input type="text" name="bottom_price" id="edit-bottom-price" /><br>
+        <input type="submit" value="Gem ændringer" />
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

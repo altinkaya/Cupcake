@@ -20,8 +20,13 @@ public class UserController
         {
             User user = UserMapper.login(name, password, connectionPool);
             ctx.sessionAttribute("currentUser", user);
-            ctx.attribute("message", "Du er nu logget ind "+user.getName()+" "+user.getStatus());
-            ctx.render("index.html");
+            if (status)
+            {
+                ctx.redirect("/admin");
+            } else
+            {
+                ctx.redirect("/frontpage");
+            }
         }
         catch (DatabaseException e)
         {

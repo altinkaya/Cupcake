@@ -22,4 +22,6 @@ public class CupcakeTop {
     public int getPrice() {
         return price;
     }
+
+
 }

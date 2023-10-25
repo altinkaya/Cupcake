@@ -39,7 +39,7 @@ public class BasketController {
         basket.addToBasket(cupcake);
 
 
-        ctx.attribute("message", "Du har nu tilføjet en cupcake til din kurv");
+        ctx.attribute("message", "Du har nu tilføjet "+ amount +" cupcake, med top: " + topMap.get(top).getFlavor() + " og bund: " + bottomMap.get(bottom).getFlavor() + " til din kurv.");
         ctx.render("frontpage.html");
         CupcakeController.dropDowns(ctx, connectionPool);
     }

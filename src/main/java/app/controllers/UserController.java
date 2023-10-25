@@ -27,6 +27,7 @@ public class UserController
             } else
             {
                 ctx.redirect("/frontpage");
+
             }
         }
         catch (DatabaseException e)

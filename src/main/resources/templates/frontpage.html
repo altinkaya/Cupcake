@@ -18,7 +18,7 @@
       <a href="#">Ordrer</a>
     </div>
     <div id="nav-right">
-      <a>iodj@kfj.dk</a>
+      <a th:text="${#ctx.username}"></a>
       <button id="log-out-btn"><a href="index.html">Log ud</a></button>
     </div>
   </div>
@@ -34,7 +34,7 @@
 
   <form id="dropdowns"  method="post">
     <select name="bottom" id="bottom">
-      <option th:each="bottom : ${#ctx.bottomFlavors}" th:value="${   bottom.id}"
+      <option th:each="bottom : ${#ctx.bottomFlavors}" th:value="${bottom.id}"
               th:text="${bottom.flavor + ' ' + bottom.price + ',-'}"></option>
     </select>
 

@@ -17,6 +17,8 @@ public class BasketController {
 
 
     public static void addCupcakeToBasket(Context ctx, ConnectionPool connectionPool) throws DatabaseException {
+
+
         HashMap<Integer,CupcakeTop> topMap = CupcakeMapper.topFlavors(connectionPool);
         HashMap<Integer, CupcakeBottom> bottomMap = CupcakeMapper.bottomFlavors(connectionPool);
 
@@ -25,14 +27,22 @@ public class BasketController {
         int amount = Integer.parseInt(ctx.formParam("amount"));
 
         Cupcake cupcake = new Cupcake(topMap.get(top), bottomMap.get(bottom), amount);
-        Basket basket = new Basket();
+
+        Basket basket;
+
+        if (Objects.isNull(ctx.sessionAttribute("userBasket"))) {
+            basket = new Basket();
+            ctx.sessionAttribute("userBasket", basket);
+        } else {
+            basket = ctx.sessionAttribute("userBasket");
+        }
 
         basket.addToBasket(cupcake);
 
-        basket.getBasket().forEach(System.out::println);
 
         ctx.attribute("message", "Du har nu tilføjet en cupcake til din kurv");
         ctx.render("test.html");
+        CupcakeController.dropDowns(ctx, connectionPool);
     }
     public static void removeCupcakeFromBasket(Cupcake cupcake, Context ctx){
         Basket basket = ctx.sessionAttribute("userBasket");

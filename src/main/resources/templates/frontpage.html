@@ -34,31 +34,26 @@
 
   <form id="dropdowns" action="cart.html" method="get">
     <select name="bottom" id="bottom">
-      <option value="0">Vælg bund</option>
-      <option value="1">Chokolade</option>
-      <option value="2">Vanilje</option>
-      <option value="3">Jordbær</option>
-      <option value="4">Citron</option>
+      <option th:each="bottom : ${#ctx.bottomFlavors}" th:value="${   bottom.id}"
+              th:text="${bottom.flavor + ' ' + bottom.price + ',-'}"></option>
     </select>
 
     <select name="top" id="top">
-      <option value="0">Vælg top</option>
-      <option value="1">Chokolade</option>
-      <option value="2">Vanilje</option>
-      <option value="3">Jordbær</option>
-      <option value="4">Citron</option>
+      <option th:each="top : ${#ctx.topFlavors}" th:value="${top.id}"
+              th:text="${top.flavor + ' ' + top.price + ',-'}"></option>
     </select>
-    <select name="antal" id="antal">
-      <option value="0">Vælg antal</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
+
+    <select name="amount" id="amount">
+      <option value="1">1 stk</option>
+      <option value="2">2 stk</option>
+      <option value="3">3 stk</option>
+      <option value="4">4 stk</option>
+      <option value="5">5 stk</option>
     </select>
 
   </form>
 
-  <button type="submit" id="atc-btn"><a>Læg i kurv</a></button>
+  <button type="submit" id="atc-btn" formaction="/addToBasket"><a>Læg i kurv</a></button>
 
 </div>
 

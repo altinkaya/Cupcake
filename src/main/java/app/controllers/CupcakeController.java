@@ -20,7 +20,7 @@ public class CupcakeController {
             HashMap<Integer, CupcakeTop> topFlavors = CupcakeMapper.topFlavors(connectionPool);
             List<CupcakeTop> toplist = new ArrayList<>(topFlavors.values());
             ctx.attribute("topFlavors", toplist);
-            ctx.render("test.html");
+            ctx.render("frontpage.html");
 
         }
         catch (DatabaseException e)
@@ -33,7 +33,7 @@ public class CupcakeController {
             HashMap<Integer, CupcakeBottom> bottomFlavors = CupcakeMapper.bottomFlavors(connectionPool);
             List<CupcakeBottom> bottomlist = new ArrayList<>(bottomFlavors.values());
             ctx.attribute("bottomFlavors", bottomlist);
-            ctx.render("test.html");
+            ctx.render("frontpage.html");
 
         }
         catch (DatabaseException e)

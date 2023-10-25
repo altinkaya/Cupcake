@@ -18,7 +18,6 @@ public class BasketController {
 
     public static void addCupcakeToBasket(Context ctx, ConnectionPool connectionPool) throws DatabaseException {
 
-
         HashMap<Integer,CupcakeTop> topMap = CupcakeMapper.topFlavors(connectionPool);
         HashMap<Integer, CupcakeBottom> bottomMap = CupcakeMapper.bottomFlavors(connectionPool);
 
@@ -41,7 +40,7 @@ public class BasketController {
 
 
         ctx.attribute("message", "Du har nu tilføjet en cupcake til din kurv");
-        ctx.render("test.html");
+        ctx.render("frontpage.html");
         CupcakeController.dropDowns(ctx, connectionPool);
     }
     public static void removeCupcakeFromBasket(Cupcake cupcake, Context ctx){

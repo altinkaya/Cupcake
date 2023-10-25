@@ -1,56 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Cupcake</title>
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <img src="../public/images/cupcakecolorlogo.png" alt="logo" width="100%">
+    <title>Login - Olsker Cupcakes</title>
+    <link rel="stylesheet" href="../public/css/style-index.css">
 </head>
 <body>
-<header>
-        <img src="../public/images/cupcakelogo.png" width="100%"/>
-    </header>
-    <div id="nav">
-        <ul id="main-menu">
-            <li> Ordrer</li>
-            <li> Kunder</li>
-            <li> iodj@kfj.dk</li>
-            <li> Log ud</li>
-        </ul>
-
-    </div>
-    <div id = 'content'>
-        <h1>Velkommen ombord</h1>
-        <h2>Øens bedste cupcakes. Vælg og bestil her:</h2>
-
-        <form id="dropdowns" action="cart.html" method="get">
-            <select name="bottom" id="bottom">
-                <option value="0">Vælg bund</option>
-                <option value="1">Chokolade</option>
-                <option value="2">Vanilje</option>
-                <option value="3">Jordbær</option>
-                <option value="4">Citron</option>
-            </select>
-            <select name="top" id="top">
-                <option value="0">Vælg top</option>
-                <option value="1">Chokolade</option>
-                <option value="2">Vanilje</option>
-                <option value="3">Jordbær</option>
-                <option value="4">Citron</option>
-            </select>
-            <select name="antal" id="antal">
-                <option value="0">Vælg antal</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select>
-
-
-            <button type="submit">Læg i kurv</button>
+<div class="container">
+    <div class="login-box">
+        <h2>Login</h2>
+        <form>
+            <div class="form-group">
+                <input type="text" id="login-username" name="login-username" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="login-password" name="login-password" placeholder="Password" required>
+            </div>
+            <button id="login-btn" type="submit" href="frontpage.html" >Login</button>
         </form>
-
+        <p>Don't have an account? <a href="#">Sign up</a></p>
     </div>
-
+</div>
 </body>
 </html>
+

@@ -23,7 +23,7 @@
 
 
 
-        <p>Don't have an account? <a href="#">Sign up</a></p>
+        <a th:if="${#ctx.session.currentUser} == null" th:href="@{/createuser}">Create account</a>
     </div>
 </div>
 </body>

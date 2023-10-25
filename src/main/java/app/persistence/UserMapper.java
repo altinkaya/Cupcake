@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserMapper
 {
@@ -41,9 +43,9 @@ public class UserMapper
 
     }
 
-    public static void createuser(String name, String password, ConnectionPool connectionPool) throws DatabaseException
+    public static void createuser(String name, String password,int balance,boolean admin, ConnectionPool connectionPool) throws DatabaseException
     {
-        String sql = "insert into \"user\" (name, password) values (?,?)";
+        String sql = "insert into \"users\" (email, password,balance,admin) values (?,?,?,?)";
 
         try (Connection connection = connectionPool.getConnection())
         {
@@ -51,6 +53,8 @@ public class UserMapper
             {
                 ps.setString(1, name);
                 ps.setString(2, password);
+                ps.setInt(3, balance);
+                ps.setBoolean(4, admin);
                 int rowsAffected =  ps.executeUpdate();
                 if (rowsAffected != 1)
                 {
@@ -69,4 +73,7 @@ public class UserMapper
             throw new DatabaseException(msg);
         }
     }
+
+
+
 }

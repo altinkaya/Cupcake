@@ -2,28 +2,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
-<div th:replace="~{fragments :: head('Opret bruger')}"></div>
-
+    <img src="images/cupcakecolorlogo.png" alt="logo" width="100%">
+    <title>Login - Olsker Cupcakes</title>
+    <link rel="stylesheet" href="/css/style-index.css">
+</head>
 <body>
-
-<div id="page-container">
-
-    <div id="page-content">
-        <div th:replace="~{fragments :: header('Opret bruger')}"></div>
+<div class="container">
+    <div class="login-box">
         <p>Indtast venligst brugerinfo:</p>
-        <div class="centered-form">
-            <form method="post">
+        <form method="post">
+            <div class="form-group">
+                <input type="text" id="login-username" name="username" placeholder="username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="login-password" name="password1" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="login-password2" name="password2" placeholder="Password" required>
+            </div>
+            <input type="hidden" name="balance" value="200">
+            <input type="hidden" name="admin" th:value="${isLoggedIn ? 'true' : 'false'}" />
+            <button id="login-btn" type="submit" formaction="/createuser">Opret bruger</button>
+            <p class="errormessage" th:text="${#ctx.message}"></p>
 
-                <input type="text" name="username" placeholder="username"/>
-                <input type="password" name="password1" placeholder="password"/>
-                <input type="password" name="password2" placeholder="gentag password"/>
-                <button type="submit" formaction="/createuser">Opret bruger</button>
 
-                <p class="errormessage" th:text="${#ctx.message}"></p>
-            </form>
-        </div>
-        <div th:replace="~{fragments :: footer}"></div>
+
+
+        </form>
     </div>
 </div>
 </body>
 </html>
+

@@ -37,6 +37,9 @@ public class Main
         app.get("/frontpage", ctx -> CupcakeController.dropDowns(ctx, connectionPool));
         app.post("/addToBasket", ctx -> BasketController.addCupcakeToBasket(ctx, connectionPool));
 
+        app.get("/createuser", ctx -> ctx.render("createuser.html"));
+        app.post("/createuser",ctx -> UserController.createuser(ctx, connectionPool ));
+
 
     }
 }

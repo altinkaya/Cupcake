@@ -10,6 +10,7 @@ import java.util.List;
 
 public class UserController
 {
+
     public static void login(Context ctx, ConnectionPool connectionPool)
     {
         String name = ctx.formParam("username");
@@ -40,14 +41,16 @@ public class UserController
         String name = ctx.formParam("username");
         String password1 = ctx.formParam("password1");
         String password2 = ctx.formParam("password2");
+        int balance = Integer.parseInt(ctx.formParam("balance"));
+        boolean admin = Boolean.parseBoolean(ctx.formParam("admin"));
 
         // Validering af passwords - at de to matcher
         if (password1.equals(password2))
         {
             try
             {
-                UserMapper.createuser(name, password1, connectionPool);
-                ctx.attribute("message", "Du er nu oprette. Log på for at komme i gang.");
+                UserMapper.createuser(name, password1,balance,admin, connectionPool);
+                ctx.attribute("message", "Du er nu oprette. Log pÃ¥ for at komme i gang.");
                 ctx.render("index.html");
 
             }
@@ -70,4 +73,7 @@ public class UserController
         ctx.req().getSession().invalidate();
         ctx.redirect("/");
     }
+
+
+
 }

@@ -34,7 +34,7 @@ public class Main
         app.get("/", ctx -> ctx.render("index.html"));
         app.post("/login", ctx -> UserController.login(ctx, connectionPool));
         app.get("/admin", ctx -> ctx.render("admin.html"));
-        app.get("/test", ctx -> CupcakeController.dropDowns(ctx, connectionPool));
+        app.get("/frontpage", ctx -> CupcakeController.dropDowns(ctx, connectionPool));
         app.post("/addToBasket", ctx -> BasketController.addCupcakeToBasket(ctx, connectionPool));
 
 

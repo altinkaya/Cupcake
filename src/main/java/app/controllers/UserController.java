@@ -21,12 +21,15 @@ public class UserController
         {
             User user = UserMapper.login(name, password, connectionPool);
             ctx.sessionAttribute("currentUser", user);
+            ctx.sessionAttribute("username", user.getName());
             if (status)
             {
                 ctx.redirect("/admin");
             } else
             {
+
                 ctx.redirect("/frontpage");
+
 
             }
         }

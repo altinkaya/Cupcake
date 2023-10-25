@@ -9,9 +9,12 @@
 }
 
 #nav a {
+    display: flex;
+    align-items: center;
     text-decoration: none;
     color: grey;
     font-weight: bold;
+    ;
 }
 
 #nav a:hover {
@@ -26,11 +29,21 @@
 }
 
 #nav-right {
-    margin-left: auto; /* Push to the right */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 10px;
+
+
+
 }
 
-#nav-right a {
-    margin-left: 10px; /* Add some spacing between "iodj@kfj.dk" and "Log ud" */
+#nav-right a button {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: grey;
+    margin-left: 10px;
 
 }
 #log-out-btn {

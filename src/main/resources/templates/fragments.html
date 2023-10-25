@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+>>>>>>> 5b80c4e29816e4427b1808f5a1391d2060c649c4
 <head th:fragment="head(title)">
     <title th:text="${title}">Frontpage</title>
     <meta charset="UTF-8">
@@ -11,16 +17,28 @@
 
     <div id="page-content">
         <header th:fragment="header(title)">
+<<<<<<< HEAD
             <img th:src="@{/images/cupcakelogo.png}" src="../public/images/cupcakelogo.png" width="100%"/>
+=======
+            <img th:src="@{/images/lifehack.png}" src="../public/images/lifehack.png" width="80%"/>
+>>>>>>> 5b80c4e29816e4427b1808f5a1391d2060c649c4
             <h1 th:text="${title}"></h1>
         </header>
 
         <footer th:fragment="footer">
             <a th:if="${#ctx.session.currentUser} == null" th:href="@{/createuser}">Create account</a>
             <a th:if="${#ctx.session.currentUser} != null" th:href="@{/logout}">Logout</a>
+<<<<<<< HEAD
             <a href="/">Til forside</a>
+=======
+            <a href="/">Home</a>
+>>>>>>> 5b80c4e29816e4427b1808f5a1391d2060c649c4
         </footer>
     </div>
 </div>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 5b80c4e29816e4427b1808f5a1391d2060c649c4

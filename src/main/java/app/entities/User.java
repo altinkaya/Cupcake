@@ -1,20 +1,21 @@
 package app.entities;
 
-import java.util.List;
-
 public class User
 {
     private int id;
     private String name;
     private String password;
+    private int balance;
+    private Boolean status;
 
-    List<Cupcake> basket;
-
-    public User(int id, String name, String password)
+    public User(int id, String name, String password, boolean status)
     {
         this.id = id;
         this.name = name;
+        this.balance = balance;
+        this.status = status;
         this.password = password;
+
     }
 
     public int getId()
@@ -26,6 +27,8 @@ public class User
     {
         return name;
     }
+
+    public Boolean getStatus(){ return status; }
 
     public String getPassword()
     {

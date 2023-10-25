@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flavor Dropdowns</title>
+</head>
+<body>
+
+<form method="post">
+
+    <div id="flavorDropdowns">
+        <select id="flavorDropdown1" name="top">
+            <option th:each="top : ${#ctx.topFlavors}" th:value="${top.id}"
+                    th:text="${top.flavor + ' ' + top.price + ',-'}"></option>
+        </select>
+        <select id="flavorDropdown2" name="bottom">
+            <option th:each="bottom : ${#ctx.bottomFlavors}" th:value="${   bottom.id}"
+                    th:text="${bottom.flavor + ' ' + bottom.price + ',-'}"></option>
+        </select>
+        <select id="amount" name="amount">
+            <option value="1">1 stk</option>
+            <option value="2">2 stk</option>
+            <option value="3">3 stk</option>
+            <option value="4">4 stk</option>
+            <option value="5">5 stk</option>
+        </select>
+        <button type="submit" formaction="/addToBasket">Tilføj til kurv</button>
+
+        <p class="message" th:text="${#ctx.message}"></p>
+
+
+    </div>
+</form>
+
+</body>
+</html>

@@ -1,7 +1,12 @@
 package app;
 
 import app.config.ThymeleafConfig;
+import app.controllers.BasketController;
+import app.controllers.CupcakeController;
+import app.controllers.UserController;
 import app.persistence.ConnectionPool;
+import app.persistence.CupcakeMapper;
+import app.persistence.UserMapper;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
 
@@ -25,9 +30,13 @@ public class Main
         }).start(7070);
 
         // Routing
+
         app.get("/", ctx -> ctx.render("index.html"));
-
-
+        app.post("/login", ctx -> UserController.login(ctx, connectionPool));
+        app.get("/admin", ctx -> ctx.render("admin.html"));
+        app.get("/test", ctx -> CupcakeController.dropDowns(ctx, connectionPool));
+        app.get("/addToBasket",ctx -> ctx.render("test.html"));
+        app.post("/addToBasket", ctx -> BasketController.addCupcakeToBasket(ctx, connectionPool));
 
     }
 }

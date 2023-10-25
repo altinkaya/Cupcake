@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
 <head th:fragment="head(title)">
     <title th:text="${title}">Frontpage</title>
     <meta charset="UTF-8">
@@ -14,14 +11,14 @@
 
     <div id="page-content">
         <header th:fragment="header(title)">
-            <img th:src="@{/images/lifehack.png}" src="../public/images/lifehack.png" width="80%"/>
+            <img th:src="@{/images/cupcakelogo.png}" src="../public/images/cupcakelogo.png" width="100%"/>
             <h1 th:text="${title}"></h1>
         </header>
 
         <footer th:fragment="footer">
             <a th:if="${#ctx.session.currentUser} == null" th:href="@{/createuser}">Create account</a>
             <a th:if="${#ctx.session.currentUser} != null" th:href="@{/logout}">Logout</a>
-            <a href="/">Home</a>
+            <a href="/">Til forside</a>
         </footer>
     </div>
 </div>

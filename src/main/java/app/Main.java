@@ -179,7 +179,7 @@ public class Main
             ctx.render("confirmation.html");
         });
 
-        app.get("/checkOrderStatus/:orderNumber", ctx -> {
+        app.get("/checkOrderStatus", ctx -> {
             int orderNumber = Integer.parseInt(ctx.pathParam("orderNumber"));
 
             OrderService orderService = new OrderService(connectionPool);
@@ -189,7 +189,7 @@ public class Main
             ctx.render("order_status.html", Map.of("orderStatus", orderStatus));
         });
 
-        app.post("/generateInvoice", ctx -> {
+        app.get("/generateInvoice", ctx -> {
             try {
                 // Retrieving the data needed for creating the order
                 Basket basket = ctx.sessionAttribute("basket"); // stored in the session

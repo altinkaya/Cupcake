@@ -49,10 +49,7 @@
           </td>
             <td th:text="${cupcake.amount + ' stk'}"> </td>
 
-            <td th:text="${cupcake.price + ',-' + '     id:' + cupcake.id}"> </td>
-            <td style="box-shadow: none;" ><button id="delete-btn" type="submit" formaction="/deleteFromBasket" >Fjern fra kurv</button></td>
-
-            <td th:text="${cupcake.price + ',-' }"> </td>
+            <td th:text="${cupcake.price + ',-'}"> </td>
             <td><button type="submit" name="id" formaction="/deleteFromBasket" th:value="${cupcake.id}">Fjern fra kurv</button></td>
         </tr>
         </tbody>

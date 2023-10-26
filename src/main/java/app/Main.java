@@ -50,8 +50,6 @@ public class Main
         app.get("/frontpage", ctx -> CupcakeController.dropDowns(ctx, connectionPool));
         app.post("/frontpage", ctx -> CupcakeController.dropDowns(ctx, connectionPool));
         app.post("/addToBasket", ctx -> BasketController.addCupcakeToBasket(ctx, connectionPool));
-        app.post("/addtop", ctx -> CupcakeController.addtop(ctx, connectionPool));
-        app.post("/addbottom", ctx -> CupcakeController.addbottom(ctx, connectionPool));
         app.get("/basket", ctx -> BasketController.showBasket(ctx));
         app.post("/generateInvoice", ctx -> OrderController.generateInvoice(ctx, connectionPool));
 

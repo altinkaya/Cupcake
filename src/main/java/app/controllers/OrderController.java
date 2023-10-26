@@ -1,7 +1,9 @@
 package app.controllers;
 
+import app.entities.Basket;
 import app.entities.Order;
 import app.entities.OrderDetails;
+import app.entities.User;
 import app.persistence.ConnectionPool;
 import app.services.OrderService;
 import io.javalin.http.Context;
@@ -45,5 +47,18 @@ public class OrderController {
         String invoice = orderService.generateInvoice(order, orderDetails);
         ctx.render("invoice.html", Map.of("invoice", invoice));
     }
+
+    public static void checkout(Context ctx, ConnectionPool connectionPool){
+        User user = ctx.sessionAttribute("currentUser");
+        Basket basket = ctx.sessionAttribute("userBasket");
+
+        Order order = new Order(user.getId(),"Betalt" ,basket.getTotalPrice());
+
+
+
+
+    }
+
+
 }
 

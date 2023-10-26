@@ -23,7 +23,7 @@ CREATE TABLE users (
 
 -- Create the ordersdetails table with foreign keys to cupcake_top and cupcake_bottom
 CREATE TABLE ordersdetails (
-    ordernr SERIAL PRIMARY KEY,
+    order_nr INT REFERENCES orders(order_nr),
     top_id INT REFERENCES cupcake_top(id),
     bottom_id INT REFERENCES cupcake_bottom(id),
     amount INT NOT NULL
@@ -31,7 +31,7 @@ CREATE TABLE ordersdetails (
 
 -- Create the orders table with a foreign key to the users table
 CREATE TABLE orders (
-    order_nr INT REFERENCES ordersdetails(ordernr),
+    order_nr SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
     status VARCHAR(255) NOT NULL,
     price DECIMAL(10, 2) NOT NULL

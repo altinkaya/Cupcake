@@ -15,8 +15,8 @@ public class Basket {
         basket.add(cupcake);
     }
 
-    public void removeFromBasket(Cupcake cupcake) {
-        basket.remove(cupcake);
+    public void removeFromBasket(int id) {
+        basket.removeIf(cupcake -> cupcake.getId() == id);
     }
 
     public List<Cupcake> getBasket() {
@@ -30,4 +30,11 @@ public class Basket {
 
     }
 
+    public int getTotalPrice() {
+        int totalPrice = 0;
+        for (Cupcake cupcake : basket) {
+            totalPrice += cupcake.getPrice();
+        }
+        return totalPrice;
+    }
 }

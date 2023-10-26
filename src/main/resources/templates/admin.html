@@ -14,7 +14,9 @@
             <li><a href="#kager">Kager</a></li>
             <li><a href="#ordre">Ordre</a></li>
             <span th:text="${#ctx.username}" style="color: grey; margin-right: 10px;"></span>
-            <button id="log-out-btn"><a href="/">Log ud</a></button>
+            <form id="logout-form" method="post">
+                <button type="submit" id="log-out-btn" formaction="/logout" ><a>Log ud</a></button>
+            </form>
         </ul>
 
     </div>

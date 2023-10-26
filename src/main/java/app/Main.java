@@ -4,15 +4,20 @@ import app.config.ThymeleafConfig;
 import app.controllers.BasketController;
 import app.controllers.CupcakeController;
 import app.controllers.UserController;
-import app.entities.CupcakeBottom;
-import app.entities.CupcakeTop;
+import app.controllers.OrderController;
+import app.entities.*;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
 import app.persistence.CupcakeMapper;
+import app.services.OrderService;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static app.controllers.OrderController.orderService;
 
 public class Main
 {
@@ -42,7 +47,7 @@ public class Main
         app.post("/addtop", ctx -> CupcakeController.addtop(ctx, connectionPool));
         app.post("/addbottom", ctx -> CupcakeController.addbottom(ctx, connectionPool));
         app.get("/basket", ctx -> BasketController.showBasket(ctx));
-
+        app.post("/generateInvoice", ctx -> OrderController.generateInvoice(ctx, connectionPool));
         app.get("/createuser", ctx -> ctx.render("createuser.html"));
         app.post("/createuser",ctx -> UserController.createuser(ctx, connectionPool ));
 
@@ -158,6 +163,70 @@ public class Main
                 ctx.render("error.html");
             }
         });
+
+        app.post("/confirmOrder", ctx -> {
+            int orderNumber = Integer.parseInt(ctx.formParam("orderNumber"));
+
+            OrderService orderService = new OrderService(connectionPool);
+            Order order = orderService.getOrder(orderNumber);
+            orderService.confirmOrder(order);
+
+            // Handle successful order confirmation, e.g., display a success message to the user
+            ctx.attribute("message", "Order confirmed successfully.");
+            ctx.render("confirmation.html");
+        });
+
+        app.get("/checkOrderStatus/:orderNumber", ctx -> {
+            int orderNumber = Integer.parseInt(ctx.pathParam("orderNumber"));
+
+            OrderService orderService = new OrderService(connectionPool);
+            boolean orderStatus = orderService.getOrderStatus(orderNumber);
+
+            // Handle order status, e.g., render a template with the status
+            ctx.render("order_status.html", Map.of("orderStatus", orderStatus));
+        });
+
+        app.post("/generateInvoice", ctx -> {
+            try {
+                // Retrieving the data needed for creating the order
+                Basket basket = ctx.sessionAttribute("basket"); // stored in the session
+                User user = ctx.sessionAttribute("user"); // stored in the session
+                int orderNumber = Integer.parseInt(ctx.formParam("orderNumber"));
+
+                // Create an instance of OrderService with the connectionPool
+                OrderService orderService = new OrderService(connectionPool);
+
+                // Create an order from the basket (if not already created)
+                int userId = user.getId();
+                orderService.createOrderFromBasket(basket, userId);
+
+                // Retrieve the order from the database using the orderNumber
+                Order order = orderService.getOrder(orderNumber);
+
+                if (order != null) {
+                    // You can also retrieve the order details or any other relevant data
+                    List<OrderDetails> orderDetails = orderService.getOrderDetails(orderNumber);
+                    String invoice = orderService.generateInvoice(order, orderDetails);
+
+                    // Handle invoice generation, e.g., display the invoice to the user
+                    ctx.render("invoice.html", Map.of("invoice", invoice));
+                } else {
+                    // Handle the case when the order is not found
+                    ctx.attribute("message", "Order not found.");
+                    ctx.render("error.html");
+                }
+            } catch (DatabaseException e) {
+                // Handle any database-related exceptions
+                ctx.attribute("message", e.getMessage());
+                ctx.render("error.html");
+            }
+        });
+
+
+
+
+
+
 
     }
 

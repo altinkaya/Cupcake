@@ -1,48 +1,57 @@
 package app.entities;
 
-public class User
-{
+public class User {
     private int id;
     private String name;
     private String password;
     private int balance;
-    private Boolean status;
+    private boolean status;
 
-    public User(int id, String name, String password, boolean status)
-    {
+    public User(int id, String name, String password, boolean status) {
         this.id = id;
         this.name = name;
+        this.password = password;
         this.balance = balance;
         this.status = status;
-        this.password = password;
-
     }
 
-    public int getId()
-    {
+    public User(String name, int balance) {
+        this.name = name;
+        this.balance = balance;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public Boolean getStatus(){ return status; }
+    public int getBalance() {
+        return balance;
+    }
 
-    public String getPassword()
-    {
+    public boolean getStatus() {
+        return status;
+    }
+
+    public String getPassword() {
         return password;
     }
 
+    public void updateBalance(int newBalance) {
+        this.balance = newBalance;
+    }
+
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
-                ", status='" + status + '\'' +
+                ", balance=" + balance +
+                ", status=" + status +
                 '}';
     }
 }

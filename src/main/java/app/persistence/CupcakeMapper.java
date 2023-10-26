@@ -150,6 +150,43 @@ public class CupcakeMapper {
     }
 
 
+    public static void deleteTop(int topId, ConnectionPool connectionPool) throws DatabaseException {
+
+        String sql = "delete from cupcake_top where id = ?";
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, topId);
+
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 1) {
+                    throw new DatabaseException("Fejl i opdatering af top");
+                }
+            } catch (SQLException e) {
+                throw new DatabaseException("Fejl i opdatering af top");
+            }
+    }
+
+    public static void deleteBottom(int bottomId, ConnectionPool connectionPool) throws DatabaseException {
+
+        String sql = "delete from cupcake_bottom where id = ?";
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, bottomId);
+
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 1) {
+                throw new DatabaseException("Fejl i opdatering af top");
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Fejl i opdatering af top");
+        }
+    }
+
+
 
 
 }

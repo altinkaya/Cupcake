@@ -74,6 +74,7 @@
                 <span th:text="${entry.value.flavor}"></span> - <span th:text="${entry.value.price}"></span>
                 <a href="javascript:void(0);" th:attr="data-bottom-id=${entry.key}, data-bottom-flavor=${entry.value.flavor}, data-bottom-price=${entry.value.price}" onclick="editbottom(this)">Rediger</a>
                 <form method="post" th:action="@{'/delete-bottom/' + ${entry.key}}">
+
                   <input type="submit" value="Slet" />
                 </form>
               </li>
@@ -90,5 +91,26 @@
     </div>
   </div>
 </div>
+<script>
+  function editTop(element) {
+    var topId = element.getAttribute("data-top-id");
+    var topFlavor = element.getAttribute("data-top-flavor");
+    var topPrice = element.getAttribute("data-top-price");
+    document.getElementById("edit-top-id").value = topId;
+    document.getElementById("edit-top-name").value = topFlavor;
+    document.getElementById("edit-top-price").value = topPrice;
+    document.getElementById("edit-form").style.display = "block";
+  }
+
+  function editbottom(element) {
+    var bottomId = element.getAttribute("data-bottom-id");
+    var bottomFlavor = element.getAttribute("data-bottom-flavor");
+    var bottomPrice = element.getAttribute("data-bottom-price");
+    document.getElementById("edit-bottom-id").value = bottomId;
+    document.getElementById("edit-bottom-name").value = bottomFlavor;
+    document.getElementById("edit-bottom-price").value = bottomPrice;
+    document.getElementById("edit-bottom").style.display = "block"; // Changed to "edit-bottom"
+  }
+</script>
 </body>
 </html>

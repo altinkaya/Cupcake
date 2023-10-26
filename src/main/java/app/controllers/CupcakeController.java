@@ -115,6 +115,58 @@ public class CupcakeController {
     }
 
 
+    public static void deleteTop(Context ctx, ConnectionPool connectionPool)
+    {
+        int topId = Integer.parseInt(ctx.pathParam("id")); // Antager, at du bruger sti-parametre (path parameters) i din rute
+        try
+        {
+            // Implementér sletningslogikken for top i din HashMap
+            CupcakeMapper.deleteTop(topId, connectionPool);
+
+            // Hent alle "tops" fra din HashMap
+            HashMap<Integer, CupcakeTop> topFlavors = CupcakeMapper.topFlavors(connectionPool);
+
+            // Send "topFlavors" til Thymeleaf-skabelonen for at vise listen af "tops"
+            ctx.attribute("topFlavors", topFlavors);
+
+            // Omdiriger brugeren til "/tops" eller en anden relevant side
+            ctx.redirect("/cake");
+        }
+        catch (DatabaseException e)
+        {
+            ctx.attribute("message", e.getMessage());
+            ctx.render("error.html");
+        }
+    }
+
+
+
+    public static void deleteBottom(Context ctx, ConnectionPool connectionPool)
+    {
+        int bottomId = Integer.parseInt(ctx.pathParam("id")); // Antager, at du bruger sti-parametre (path parameters) i din rute
+        try
+        {
+            // Implementér sletningslogikken for top i din HashMap
+            CupcakeMapper.deleteBottom(bottomId, connectionPool);
+
+            // Hent alle "tops" fra din HashMap
+            HashMap<Integer, CupcakeBottom> bottomFlavors = CupcakeMapper.bottomFlavors(connectionPool);
+
+            // Send "topFlavors" til Thymeleaf-skabelonen for at vise listen af "tops"
+            ctx.attribute("topFlavors", bottomFlavors);
+
+            // Omdiriger brugeren til "/tops" eller en anden relevant side
+            ctx.redirect("/cake");
+        }
+        catch (DatabaseException e)
+        {
+            ctx.attribute("message", e.getMessage());
+            ctx.render("error.html");
+        }
+    }
+
+
+
 
 
 }

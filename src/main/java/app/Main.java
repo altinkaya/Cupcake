@@ -6,13 +6,16 @@ import app.controllers.CupcakeController;
 import app.controllers.UserController;
 import app.entities.CupcakeBottom;
 import app.entities.CupcakeTop;
+import app.entities.User;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
 import app.persistence.CupcakeMapper;
+import app.persistence.UserMapper;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Main
 {
@@ -39,8 +42,7 @@ public class Main
         app.post("/login", ctx -> UserController.login(ctx, connectionPool));
         app.get("/frontpage", ctx -> CupcakeController.dropDowns(ctx, connectionPool));
         app.post("/addToBasket", ctx -> BasketController.addCupcakeToBasket(ctx, connectionPool));
-        app.post("/addtop", ctx -> CupcakeController.addtop(ctx, connectionPool));
-        app.post("/addbottom", ctx -> CupcakeController.addbottom(ctx, connectionPool));
+
 
 
 
@@ -62,11 +64,34 @@ public class Main
         app.get("/users", ctx -> {
             Boolean loggedIn = ctx.sessionAttribute("status");
             if (loggedIn != null && loggedIn) {
-                ctx.render("users.html");
+                String email = ctx.queryParam("email");
+                User user = null;
+                if (email != null && !email.isEmpty()) {
+                    user = UserMapper.searchUser(email, connectionPool);
+                }
+
+                if (user != null) {
+                    ctx.render("users.html", Map.of("user", user));
+                } else {
+                    ctx.attribute("kunneIkkeFindeBrugern", "Brugeren blev ikke fundet.");
+                    ctx.render("users.html");
+                }
             } else {
                 ctx.redirect("/");
             }
         });
+
+
+        app.post("/addtop", ctx -> {
+            CupcakeController.addtop(ctx, connectionPool);
+            ctx.redirect("/cake"); // Omdiriger brugeren tilbage til "cake"-siden
+        });
+
+        app.post("/addbottom", ctx -> {
+            CupcakeController.addbottom(ctx, connectionPool);
+            ctx.redirect("/cake"); // Omdiriger brugeren tilbage til "cake"-siden
+        });
+
 
         app.get("/cake", ctx -> {
             // Hent alle "tops" fra din mapper og send dem til skabelonen som en HashMap
@@ -159,6 +184,71 @@ public class Main
                 ctx.render("error.html");
             }
         });
+
+
+        app.post("/delete-top/{id}", ctx -> {
+            CupcakeController.deleteTop(ctx, connectionPool);
+        });
+
+
+        app.post("/delete-bottom/{id}", ctx -> {
+            CupcakeController.deleteBottom(ctx, connectionPool);
+        });
+
+
+
+
+        app.post("/updateBalance", ctx -> {
+            Boolean loggedIn = ctx.sessionAttribute("status");
+            if (loggedIn != null && loggedIn) {
+                int userId = Integer.parseInt(ctx.formParam("userId"));
+                int newBalance = Integer.parseInt(ctx.formParam("newBalance"));
+
+                // Implementer logikken til at opdatere brugerens balance i din database
+                // Brug userId og newBalance-værdierne til at udføre opdateringen
+
+                // Efter opdatering kan du omdirigere brugeren tilbage til brugersiden
+                ctx.redirect("/users?email=" + ctx.queryParam("email"));
+            } else {
+                ctx.redirect("/");
+            }
+        });
+
+
+        app.get("/users", ctx -> {
+            Boolean loggedIn = ctx.sessionAttribute("status");
+            if (loggedIn != null && loggedIn) {
+                ctx.render("users.html");
+            } else {
+                ctx.redirect("/");
+            }
+        });
+
+
+
+        app.post("/editBalance", ctx -> {
+            String email = ctx.formParam("email");
+            int newBalance = Integer.parseInt(ctx.formParam("newBalance"));
+
+            try {
+                User user = UserController.editBalance(email, newBalance, connectionPool);
+
+                if (user != null) {
+                    ctx.render("users.html", Map.of("user", user));
+                } else {
+                    ctx.attribute("kunneIkkeRedigereBelob", "Kunne ikke finde brugeren.");
+                    ctx.render("users.html");
+                }
+            } catch (DatabaseException e) {
+                ctx.attribute("kunneIkkeRedigereBelob", e.getMessage());
+                ctx.render("users.html");
+            }
+        });
+
+
+
+
+
 
     }
 

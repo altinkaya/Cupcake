@@ -1,5 +1,6 @@
 package app.persistence;
 
+import app.entities.CupcakeTop;
 import app.entities.User;
 import app.exceptions.DatabaseException;
 
@@ -8,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class UserMapper
@@ -73,6 +75,53 @@ public class UserMapper
             throw new DatabaseException(msg);
         }
     }
+
+
+
+    public static User searchUser(String username, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "SELECT email, balance FROM \"users\" WHERE email = ?";
+        User user = null;
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, username);
+                ResultSet resultSet = ps.executeQuery();
+
+                if (resultSet.next()) {
+                    String name = resultSet.getString("email");
+                    int balance = resultSet.getInt("balance");
+
+                    user = new User(name, balance); // Create a User object with the retrieved email and balance
+                }
+            }
+        } catch (SQLException e) {
+            String msg = "Der er sket en fejl under søgning efter brugeren.";
+            throw new DatabaseException(msg);
+        }
+
+        return user;
+    }
+
+
+
+    public static void updateBalance(int userId, int balance, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "UPDATE users SET balance = ? WHERE id = ?";
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, balance);
+            ps.setInt(3, userId);
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 1) {
+                throw new DatabaseException("Fejl i opdatering af top");
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Fejl i opdatering af top");
+        }
+    }
+
+
 
 
 

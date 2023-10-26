@@ -18,11 +18,70 @@
     </ul>
 
     <div class="indhold-box">
-    <h1>Brugersektion</h1>
-    <p>Dette er brugersektionens indhold. Du kan tilpasse denne HTML efter dine behov.</p>
-  </div>
+
+
+
+      <body>
+      <div id="searchForm">
+        <h2>Søg efter bruger</h2>
+        <form action="/searchUser" method="get">
+          <label for="email">Email:</label>
+          <input type="text" id="email" name="email" required>
+          <button type="submit" onclick="toggleSearchAndEdit()">Søg</button>
+        </form>
+      </div>
+
+      <div id="editForm" style="display: none;">
+        <h2>Rediger brugeroplysninger</h2>
+        <form action="/updateUser" method="post">
+          <input type="hidden" name="userId" th:value="${user.id}" />
+          <label for="newBalance">Ny balance:</label>
+          <input type="text" id="newBalance" name="newBalance" required />
+          <button type="submit">Opdater balance</button>
+          <button type="button" onclick="toggleSearchResults()">Annuller</button>
+        </form>
+      </div>
+
+      <div id="searchResults" style="display: none;">
+        <h2>Brugeroplysninger</h2>
+        <p>Navn: <span th:text="${user.name}"></span></p>
+        <p>Email: <span th:text="${user.email}"></span></p>
+        <p>Nuværende balance: <span th:text="${user.balance}"></span></p>
+        <button type="button" onclick="toggleSearchAndEdit()">Rediger</button>
+      </div>
+
+      <div th:if="${kunneIkkeFindeBrugern != null}">
+        <p th:text="${kunneIkkeFindeBrugern}"></p>
+      </div>
+
+
+    </div>
   </div>
 </div>
+
+
+<script type="text/javascript">
+  function toggleSearchAndEdit() {
+    var searchForm = document.getElementById("searchForm");
+    var editForm = document.getElementById("editForm");
+    var searchResults = document.getElementById("searchResults");
+
+    searchForm.style.display = "none";
+    editForm.style.display = "block";
+    searchResults.style.display = "none";
+  }
+
+  function toggleSearchResults() {
+    var searchForm = document.getElementById("searchForm");
+    var editForm = document.getElementById("editForm");
+    var searchResults = document.getElementById("searchResults");
+
+    searchForm.style.display = "none";
+    editForm.style.display = "none";
+    searchResults.style.display = "block";
+  }
+</script>
+
 
 </body>
 </html>

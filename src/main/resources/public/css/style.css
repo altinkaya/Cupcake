@@ -14,7 +14,6 @@
     text-decoration: none;
     color: grey;
     font-weight: bold;
-    ;
 }
 
 #nav a:hover {
@@ -33,10 +32,8 @@
     align-items: center;
     justify-content: space-between;
     padding-right: 10px;
-
-
-
 }
+
 
 #nav-right a button {
     display: flex;
@@ -46,12 +43,20 @@
     margin-left: 10px;
 
 }
+
+
 #log-out-btn {
+    background-image: linear-gradient(to bottom right, #915CC1, #3C1460);
+    color: white;
+    border-radius: 5px;
     margin-left: 5px;
 }
 
 #log-out-btn a {
-    padding-right: 7px;
+    color: white;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 #content {
@@ -73,20 +78,20 @@ h2 {
 }
 
 #atc-btn {
-    background-color: #007BFF; /* Set your desired background color */
+    background-image: linear-gradient(to bottom right, #915CC1, #3C1460);
     display: flex;
     align-items: center;
-    color: white; /* Set the text color */
+    color: white;
     border: none;
     cursor: pointer;
-    font-size: 16px; /* Adjust the font size to control text size */
+    font-size: 16px;
     border-radius: 5px;
     margin: 20px 55px 20px auto;
     padding: 10px 20px 10px 20px;
 }
 
 #atc-btn:hover {
-    background-color: #0069D9;
+    background-image: linear-gradient(to bottom right, #3C1460, #915CC1);
 }
 
 /* Add margins to create space between form elements */
@@ -154,3 +159,64 @@ h2 {
 #toggle3:checked + label + #hiddenDiv3 {
     display: block;
 }
+
+/* Basket */
+
+#contentBasket {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    background-color: #F5F5F5;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+#cupcakeBasket {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    background-color: white;
+    padding: 20px 60px 20px 60px;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    /
+}
+
+#cupcake-txt {
+    border: 1px solid #3C1460;
+    color:blue;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+th, td {
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-image: linear-gradient(to bottom right, #915CC1, #3C1460);
+    color: white;
+}
+
+#delete-btn {
+    background-image: linear-gradient(to bottom right, #915CC1, #3C1460);
+    display: flex;
+    align-items: center;
+    color: white;
+    border: none !important;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 5px;
+    padding: 10px 20px 10px 20px;
+}
+
+

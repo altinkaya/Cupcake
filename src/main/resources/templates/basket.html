@@ -29,7 +29,7 @@
 </div>
 
 </div>
-<div id = 'content'>
+<div id = 'contentBasket'>
 
 
     <form id="cupcakeBasket" method="post">
@@ -39,12 +39,18 @@
           <th>Cupcake</th>
           <th>Antal</th>
           <th>Pris</th>
+
         <tbody>
-        <tr th:each="cupcake : ${#ctx.basket}" >
-          <td th:text="${'Top: ' + cupcake.topFlavor + ' - Bund: ' + cupcake.bottomFlavor} "> </td>
+
+        <tr th:each="cupcake : ${#ctx.basket}">
+          <td>
+            <span th:text="${'Top: ' + cupcake.topFlavor}"></span><br>
+          <span th:text="${'Bund: ' + cupcake.bottomFlavor}"></span>
+          </td>
             <td th:text="${cupcake.amount + ' stk'}"> </td>
             <td th:text="${cupcake.price + ',-' + '     id:' + cupcake.id}"> </td>
-            <td><button type="submit" name="id" formaction="/deleteFromBasket" th:value="${cupcake.id}">Fjern fra kurv</button></td>
+            <td style="box-shadow: none;" ><button id="delete-btn" type="submit" formaction="/deleteFromBasket" >Fjern fra kurv</button></td>
+
         </tr>
         </tbody>
       </table>

@@ -48,9 +48,14 @@
           <span th:text="${'Bund: ' + cupcake.bottomFlavor}"></span>
           </td>
             <td th:text="${cupcake.amount + ' stk'}"> </td>
+<<<<<<< Updated upstream
             <td th:text="${cupcake.price + ',-' + '     id:' + cupcake.id}"> </td>
             <td style="box-shadow: none;" ><button id="delete-btn" type="submit" formaction="/deleteFromBasket" >Fjern fra kurv</button></td>
 
+=======
+            <td th:text="${cupcake.price + ',-' }"> </td>
+            <td><button type="submit" name="id" formaction="/deleteFromBasket" th:value="${cupcake.id}">Fjern fra kurv</button></td>
+>>>>>>> Stashed changes
         </tr>
         </tbody>
       </table>
@@ -64,8 +69,10 @@
 </div>
 
 <div id="total">
+<form id="checkout-form" method="post">
   <h3>Total: <span th:text="${#ctx.totalPrice + ',-'}"></span></h3>
-  <button id="checkout-btn" type="submit" formaction="/checkout"><a>Gå til betaling</a></button>
+  <button id="checkout-btn" type="submit" formaction="/checkout"><a>Betal</a></button>
+</form>
 </div>
 
 </body>

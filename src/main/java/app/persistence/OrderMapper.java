@@ -1,5 +1,6 @@
 package app.persistence;
 
+import app.entities.Order;
 import app.entities.OrderDetails;
 import app.exceptions.DatabaseException;
 
@@ -30,6 +31,8 @@ public class OrderMapper {
         throw new DatabaseException("Der skete en fejl. Kan ikke oprette en ordre");
     }
 
+
+
     public static void createOrderDetails(OrderDetails orderDetails, ConnectionPool connectionPool) throws DatabaseException {
         try (Connection connection = connectionPool.getConnection()) {
             String insertOrderDetailsSQL = "INSERT INTO orderdetails (ordernr, top_id, bottom_id, amount) VALUES (?, ?, ?, ?)";
@@ -47,4 +50,20 @@ public class OrderMapper {
             throw new DatabaseException(msg);
         }
     }
+    public static void createOrderDatabase(ConnectionPool connectionPool, Order order) throws DatabaseException {
+        try (Connection connection = connectionPool.getConnection()) {
+            String sql = "INSERT INTO `order` (user_id, status, price) VALUES (?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, order.getUserId());
+            preparedStatement.setString(2, order.getStatus());
+            preparedStatement.setInt(3, order.getPrice());
+
+        } catch (SQLException e) {
+            String msg = "Der skete en fejl. Kan ikke oprette en ordre";
+            throw new DatabaseException(msg);
+        }
+
+
+    }
+
 }

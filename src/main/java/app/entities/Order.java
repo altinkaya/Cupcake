@@ -4,11 +4,16 @@ public class Order {
 
     private int orderNr;
     private int userId;
-    private boolean status;
+    private String status;
     private int price;
 
-    public Order(int orderNr, int userId, boolean status, int price) {
+    public Order(int orderNr, int userId, String status, int price) {
         this.orderNr = orderNr;
+        this.userId = userId;
+        this.status = status;
+        this.price = price;
+    }
+    public Order(int userId, String status, int price) {
         this.userId = userId;
         this.status = status;
         this.price = price;
@@ -22,7 +27,7 @@ public class Order {
         return userId;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 

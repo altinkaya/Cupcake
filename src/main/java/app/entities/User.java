@@ -5,6 +5,7 @@ public class User {
     private String name;
     private String password;
     private int balance;
+    private String email;
     private boolean status;
 
     public User(int id, String name, String password, boolean status) {
@@ -17,6 +18,12 @@ public class User {
 
     public User(String name, int balance) {
         this.name = name;
+        this.balance = balance;
+    }
+
+    public User(int id, String email, int balance) {
+        this.id = id;
+        this.email = email;
         this.balance = balance;
     }
 
@@ -42,6 +49,14 @@ public class User {
 
     public void updateBalance(int newBalance) {
         this.balance = newBalance;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public boolean isStatus() {
+        return status;
     }
 
     @Override

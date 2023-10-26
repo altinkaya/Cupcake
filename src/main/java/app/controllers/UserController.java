@@ -73,10 +73,11 @@ public class UserController {
 
 
     public static void searchUser(Context ctx, ConnectionPool connectionPool) {
-        String email = ctx.queryParam("email");
+        String id = ctx.queryParam("email");
         try {
-            User user = UserMapper.searchUser(email, connectionPool);
-            ctx.render("users.html", Map.of("user", user));
+            User user = UserMapper.searchUser(id, connectionPool);
+            ctx.attribute("user", user);
+            ctx.render("users.html");
         } catch (DatabaseException e) {
             ctx.attribute("kunne Ikke Finde Brugern", e.getMessage());
             ctx.render("users.html");

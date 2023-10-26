@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
 <head>
   <img src="images/cupcakecolorlogo.png" alt="logo" width="100%">
   <title>Admin - Olsker Cupcakes</title>
@@ -15,76 +14,44 @@
       <li><a href="/ordre">Ordre</a></li>
       <span th:text="${#ctx.username}" style="color: grey; margin-right: 10px;"></span>
       <form id="logout-form" method="post">
-        <button type="submit" id="log-out-btn" formaction="/logout" ><a>Log ud</a></button>
+        <button type="submit" id="log-out-btn" formaction="/logout"><a>Log ud</a></button>
       </form>
     </ul>
 
     <div class="indhold-box">
+      <h2>Rediger og Søg Bruger</h2>
 
+      <form method="post" action="/searchUser">
+        <div>
+          <label for="email">Søg efter e-mail:</label>
+          <input type="text" id="email" name="email" />
+          <button type="submit">Søg</button>
+        </div>
+      </form>
 
+      <div th:if="${user != null}">
+        <h3>Brugeroplysninger</h3>
+        <form method="post" action="/updateUser">
+          <input type="hidden" name="id" th:value="${user.id}" />
+          <div>
+            <label for="newBalance">Nyt saldo:</label>
 
-      <body>
-      <div id="searchForm">
-        <h2>Søg efter bruger</h2>
-        <form action="/searchUser" method="get">
-          <label for="email">Email:</label>
-          <input type="text" id="email" name="email" required>
-          <button type="submit" onclick="toggleSearchAndEdit()">Søg</button>
+          </div>
+          <p>Bruger ID: <span th:text="${user.id}"></span></p>
+          <p>E-mail: <span th:text="${user.email}"></span></p>
+          <input type="text" id="newBalance" name="newBalance"  th:value="${user.balance}" />
+          <button type="submit">Gem ændringer</button>
         </form>
+
       </div>
 
-      <div id="editForm" style="display: none;">
-        <h2>Rediger brugeroplysninger</h2>
-        <form action="/updateUser" method="post">
-          <input type="hidden" name="userId" th:value="${user.id}" />
-          <label for="newBalance">Ny balance:</label>
-          <input type="text" id="newBalance" name="newBalance" required />
-          <button type="submit">Opdater balance</button>
-          <button type="button" onclick="toggleSearchResults()">Annuller</button>
-        </form>
+      <div th:if="${user == null}">
+        <p>Brugeren blev ikke fundet.</p>
       </div>
 
-      <div id="searchResults" style="display: none;">
-        <h2>Brugeroplysninger</h2>
-        <p>Navn: <span th:text="${user.name}"></span></p>
-        <p>Email: <span th:text="${user.email}"></span></p>
-        <p>Nuværende balance: <span th:text="${user.balance}"></span></p>
-        <button type="button" onclick="toggleSearchAndEdit()">Rediger</button>
-      </div>
-
-      <div th:if="${kunneIkkeFindeBrugern != null}">
-        <p th:text="${kunneIkkeFindeBrugern}"></p>
-      </div>
-
-
+      <p class="errormessage" th:text="${#ctx.message}"></p>
     </div>
   </div>
 </div>
-
-
-<script type="text/javascript">
-  function toggleSearchAndEdit() {
-    var searchForm = document.getElementById("searchForm");
-    var editForm = document.getElementById("editForm");
-    var searchResults = document.getElementById("searchResults");
-
-    searchForm.style.display = "none";
-    editForm.style.display = "block";
-    searchResults.style.display = "none";
-  }
-
-  function toggleSearchResults() {
-    var searchForm = document.getElementById("searchForm");
-    var editForm = document.getElementById("editForm");
-    var searchResults = document.getElementById("searchResults");
-
-    searchForm.style.display = "none";
-    editForm.style.display = "none";
-    searchResults.style.display = "block";
-  }
-</script>
-
-
 </body>
 </html>
-

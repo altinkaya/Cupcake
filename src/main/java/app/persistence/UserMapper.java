@@ -78,20 +78,22 @@ public class UserMapper
 
 
 
-    public static User searchUser(String username, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "SELECT email, balance FROM \"users\" WHERE email = ?";
+    public static User searchUser(String email, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "SELECT * FROM \"users\" WHERE email = ?";
         User user = null;
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setString(1, username);
+                ps.setString(1, email);
                 ResultSet resultSet = ps.executeQuery();
 
                 if (resultSet.next()) {
-                    String name = resultSet.getString("email");
-                    int balance = resultSet.getInt("balance");
 
-                    user = new User(name, balance); // Create a User object with the retrieved email and balance
+                    int balance = resultSet.getInt("balance");
+                    int id = resultSet.getInt("id");
+
+
+                    user = new User(id,email, balance); // Create a User object with the retrieved email and balance
                 }
             }
         } catch (SQLException e) {
@@ -110,7 +112,7 @@ public class UserMapper
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, balance);
-            ps.setInt(3, userId);
+            ps.setInt(2, userId);
 
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected != 1) {

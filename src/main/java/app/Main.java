@@ -50,8 +50,9 @@ public class Main
         app.get("/frontpage", ctx -> CupcakeController.dropDowns(ctx, connectionPool));
         app.post("/frontpage", ctx -> CupcakeController.dropDowns(ctx, connectionPool));
         app.post("/addToBasket", ctx -> BasketController.addCupcakeToBasket(ctx, connectionPool));
-        app.post("/addtop", ctx -> CupcakeController.addtop(ctx, connectionPool));
-        app.post("/addbottom", ctx -> CupcakeController.addbottom(ctx, connectionPool));
+
+
+
         app.get("/basket", ctx -> BasketController.showBasket(ctx));
         app.post("/generateInvoice", ctx -> OrderController.generateInvoice(ctx, connectionPool));
 
@@ -72,26 +73,6 @@ public class Main
         });
 
 
-
-        app.get("/users", ctx -> {
-            Boolean loggedIn = ctx.sessionAttribute("status");
-            if (loggedIn != null && loggedIn) {
-                String email = ctx.queryParam("email");
-                User user = null;
-                if (email != null && !email.isEmpty()) {
-                    user = UserMapper.searchUser(email, connectionPool);
-                }
-
-                if (user != null) {
-                    ctx.render("users.html", Map.of("user", user));
-                } else {
-                    ctx.attribute("kunneIkkeFindeBrugern", "Brugeren blev ikke fundet.");
-                    ctx.render("users.html");
-                }
-            } else {
-                ctx.redirect("/");
-            }
-        });
 
 
         app.post("/addtop", ctx -> {
@@ -208,60 +189,6 @@ public class Main
         });
 
 
-
-
-        app.post("/updateBalance", ctx -> {
-            Boolean loggedIn = ctx.sessionAttribute("status");
-            if (loggedIn != null && loggedIn) {
-                int userId = Integer.parseInt(ctx.formParam("userId"));
-                int newBalance = Integer.parseInt(ctx.formParam("newBalance"));
-
-                // Implementer logikken til at opdatere brugerens balance i din database
-                // Brug userId og newBalance-værdierne til at udføre opdateringen
-
-                // Efter opdatering kan du omdirigere brugeren tilbage til brugersiden
-                ctx.redirect("/users?email=" + ctx.queryParam("email"));
-            } else {
-                ctx.redirect("/");
-            }
-        });
-
-
-        app.get("/users", ctx -> {
-            Boolean loggedIn = ctx.sessionAttribute("status");
-            if (loggedIn != null && loggedIn) {
-                ctx.render("users.html");
-            } else {
-                ctx.redirect("/");
-            }
-        });
-
-
-
-        app.post("/editBalance", ctx -> {
-            String email = ctx.formParam("email");
-            int newBalance = Integer.parseInt(ctx.formParam("newBalance"));
-
-            try {
-                User user = UserController.editBalance(email, newBalance, connectionPool);
-
-                if (user != null) {
-                    ctx.render("users.html", Map.of("user", user));
-                } else {
-                    ctx.attribute("kunneIkkeRedigereBelob", "Kunne ikke finde brugeren.");
-                    ctx.render("users.html");
-                }
-            } catch (DatabaseException e) {
-                ctx.attribute("kunneIkkeRedigereBelob", e.getMessage());
-                ctx.render("users.html");
-            }
-        });
-
-
-
-
-
-
         app.post("/confirmOrder", ctx -> {
             int orderNumber = Integer.parseInt(ctx.formParam("orderNumber"));
 
@@ -322,6 +249,37 @@ public class Main
 
 
 
+        app.post("/updateUser", ctx -> {
+            int userId = Integer.parseInt(ctx.formParam("id"));
+            int newBalance = Integer.parseInt(ctx.formParam("newBalance"));
+
+            try {
+                // Opdater brugerens saldo i din database eller mapper med de modtagne data
+                UserMapper.updateBalance(userId, newBalance, connectionPool);
+                ctx.redirect("/users"); // Omdiriger brugeren til brugerlisten
+            } catch (DatabaseException e) {
+                ctx.attribute("message", e.getMessage());
+                ctx.render("error.html");
+            }
+        });
+
+        app.post("/searchUser", ctx -> {
+            String email = ctx.formParam("email");
+
+            User user = UserMapper.searchUser(email, connectionPool);
+
+            if (user != null) {
+                ctx.attribute("user", user);
+            } else {
+                ctx.attribute("user", null);
+            }
+
+            ctx.render("users.html"); // Dette vil vise resultaterne på den samme side.
+        });
+
+        app.get("/users", ctx -> {
+            ctx.render("users.html");
+        });
 
 
 

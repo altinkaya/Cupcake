@@ -1,10 +1,9 @@
 package app.controllers;
 
-import app.entities.Basket;
-import app.entities.Order;
-import app.entities.OrderDetails;
-import app.entities.User;
+import app.entities.*;
+import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
+import app.persistence.OrderMapper;
 import app.services.OrderService;
 import io.javalin.http.Context;
 
@@ -48,17 +47,23 @@ public class OrderController {
         ctx.render("invoice.html", Map.of("invoice", invoice));
     }
 
-    public static void checkout(Context ctx, ConnectionPool connectionPool){
+    public static void checkout(Context ctx, ConnectionPool connectionPool) throws DatabaseException {
         User user = ctx.sessionAttribute("currentUser");
         Basket basket = ctx.sessionAttribute("userBasket");
 
-        Order order = new Order(user.getId(),"Betalt" ,basket.getTotalPrice());
+        Order order = new Order(user.getId(), "Betalt", basket.getTotalPrice());
 
+        int newOrderId = OrderMapper.createOrderDatabase(connectionPool, order);
 
-
-
+        for (Cupcake c : basket.getBasket())
+        {
+            // insert into orderdetails
+            OrderMapper.createOrderDetailsDatabase(newOrderId, c.getTopId(), c.getBottomId(), c.getAmount(), connectionPool);
+        }
     }
 
 
+
 }
+
 

@@ -4,10 +4,7 @@ import app.entities.Order;
 import app.entities.OrderDetails;
 import app.exceptions.DatabaseException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class OrderMapper {
     public static int createOrder(int userId, boolean status, int price, ConnectionPool connectionPool) throws DatabaseException {
@@ -50,20 +47,40 @@ public class OrderMapper {
             throw new DatabaseException(msg);
         }
     }
-    public static void createOrderDatabase(ConnectionPool connectionPool, Order order) throws DatabaseException {
+    public static int createOrderDatabase(ConnectionPool connectionPool, Order order) throws DatabaseException {
+        int newOrderId = 0;
         try (Connection connection = connectionPool.getConnection()) {
-            String sql = "INSERT INTO `order` (user_id, status, price) VALUES (?, ?, ?)";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, order.getUserId());
-            preparedStatement.setString(2, order.getStatus());
-            preparedStatement.setInt(3, order.getPrice());
+            String sql = "INSERT INTO \"orders\" (user_id, status, price) VALUES (?, ?, ?)";
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, order.getUserId());
+            ps.setString(2, order.getStatus());
+            ps.setInt(3, order.getPrice());
+            ResultSet rs = ps.executeQuery();
+            ResultSet generatedKeys = ps.getGeneratedKeys();
+            if (generatedKeys.next()) {
+               newOrderId = generatedKeys.getInt(1);
+            }
 
         } catch (SQLException e) {
             String msg = "Der skete en fejl. Kan ikke oprette en ordre";
             throw new DatabaseException(msg);
         }
-
-
+        return newOrderId;
     }
 
+
+    public static void createOrderDetailsDatabase(int newOrderId, int topId, int bottomId, int amount, ConnectionPool connectionPool) throws DatabaseException {
+        try (Connection connection = connectionPool.getConnection()) {
+            String sql = "INSERT INTO \"orderdetails\" (ordernr, top_id, bottom_id, amount) VALUES (?, ?, ?, ?)";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, newOrderId);
+            ps.setInt(2, topId);
+            ps.setInt(3, bottomId);
+            ps.setInt(4, amount);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            String msg = "Der er sket en fejl. Prøv igen";
+            throw new DatabaseException(msg);
+        }
+    }
 }

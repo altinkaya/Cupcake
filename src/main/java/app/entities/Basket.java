@@ -15,8 +15,8 @@ public class Basket {
         basket.add(cupcake);
     }
 
-    public void removeFromBasket(Cupcake cupcake) {
-        basket.remove(cupcake);
+    public void removeFromBasket(int id) {
+        basket.removeIf(cupcake -> cupcake.getId() == id);
     }
 
     public List<Cupcake> getBasket() {

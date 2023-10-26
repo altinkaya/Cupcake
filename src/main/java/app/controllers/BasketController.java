@@ -43,9 +43,11 @@ public class BasketController {
         ctx.render("frontpage.html");
         CupcakeController.dropDowns(ctx, connectionPool);
     }
-    public static void removeCupcakeFromBasket(Cupcake cupcake, Context ctx){
+    public static void removeCupcakeFromBasket(Context ctx){
         Basket basket = ctx.sessionAttribute("userBasket");
-        basket.removeFromBasket(cupcake);
+        int id = Integer.parseInt(ctx.pathParam("id"));
+        basket.removeFromBasket(id);
+        ctx.render("basket.html");
 
     }
 

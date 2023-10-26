@@ -48,6 +48,8 @@ public class Main
         app.post("/addbottom", ctx -> CupcakeController.addbottom(ctx, connectionPool));
         app.get("/basket", ctx -> BasketController.showBasket(ctx));
         app.post("/generateInvoice", ctx -> OrderController.generateInvoice(ctx, connectionPool));
+
+        app.get("/deleteFromBasket", ctx -> BasketController.removeCupcakeFromBasket(ctx));
         app.get("/createuser", ctx -> ctx.render("createuser.html"));
         app.post("/createuser",ctx -> UserController.createuser(ctx, connectionPool ));
         

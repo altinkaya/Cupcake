@@ -42,7 +42,7 @@
           <td th:text="${'Top: ' + cupcake.topFlavor + ' - Bund: ' + cupcake.bottomFlavor} "> </td>
             <td th:text="${cupcake.amount + ' stk'}"> </td>
             <td th:text="${cupcake.price + ',-' + '     id:' + cupcake.id}"> </td>
-            <td><button type="submit" formaction="/deleteFromBasket" th:attr="data-id=${cupcake.id}">Fjern fra kurv</button></td>
+            <td><button type="submit" formaction="/deleteFromBasket">Fjern fra kurv</button></td>
 
         </tr>
         </tbody>

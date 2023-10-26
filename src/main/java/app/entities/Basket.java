@@ -30,4 +30,11 @@ public class Basket {
 
     }
 
+    public int getTotalPrice() {
+        int totalPrice = 0;
+        for (Cupcake cupcake : basket) {
+            totalPrice += cupcake.getPrice();
+        }
+        return totalPrice;
+    }
 }

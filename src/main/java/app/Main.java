@@ -43,15 +43,17 @@ public class Main
         app.get("/", ctx -> ctx.render("index.html"));
         app.post("/login", ctx -> UserController.login(ctx, connectionPool));
         app.get("/frontpage", ctx -> CupcakeController.dropDowns(ctx, connectionPool));
+        app.post("/frontpage", ctx -> CupcakeController.dropDowns(ctx, connectionPool));
         app.post("/addToBasket", ctx -> BasketController.addCupcakeToBasket(ctx, connectionPool));
         app.post("/addtop", ctx -> CupcakeController.addtop(ctx, connectionPool));
         app.post("/addbottom", ctx -> CupcakeController.addbottom(ctx, connectionPool));
         app.get("/basket", ctx -> BasketController.showBasket(ctx));
         app.post("/generateInvoice", ctx -> OrderController.generateInvoice(ctx, connectionPool));
 
-        app.get("/deleteFromBasket", ctx -> BasketController.removeCupcakeFromBasket(ctx));
+        app.post("/deleteFromBasket", ctx -> BasketController.removeCupcakeFromBasket(ctx));
         app.get("/createuser", ctx -> ctx.render("createuser.html"));
         app.post("/createuser",ctx -> UserController.createuser(ctx, connectionPool ));
+        app.post("/logout", ctx -> UserController.logout(ctx));
         
 
             //låser siden så man kun kan tilgå den med admin retigheder

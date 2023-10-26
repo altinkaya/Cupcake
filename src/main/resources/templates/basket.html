@@ -21,7 +21,9 @@
     <div id="nav-right">
       <a href="basket"><img src="images/basket2.png"  height="5%" width="5%"></a>
       <a th:text="${#ctx.username}"></a>
-      <button id="log-out-btn"><a href="/">Log ud</a></button>
+      <form id="logout-form" method="post">
+      <button type="submit" id="log-out-btn" formaction="/logout" ><a>Log ud</a></button>
+      </form>
     </div>
   </div>
 </div>
@@ -38,18 +40,26 @@
           <th>Antal</th>
           <th>Pris</th>
         <tbody>
-        <tr th:each="cupcake : ${#ctx.basket}">
+        <tr th:each="cupcake : ${#ctx.basket}" >
           <td th:text="${'Top: ' + cupcake.topFlavor + ' - Bund: ' + cupcake.bottomFlavor} "> </td>
             <td th:text="${cupcake.amount + ' stk'}"> </td>
             <td th:text="${cupcake.price + ',-' + '     id:' + cupcake.id}"> </td>
-            <td><button type="submit" formaction="/deleteFromBasket">Fjern fra kurv</button></td>
-
+            <td><button type="submit" name="id" formaction="/deleteFromBasket" th:value="${cupcake.id}">Fjern fra kurv</button></td>
         </tr>
         </tbody>
       </table>
     </form>
+</div>
 
+<div id="back">
+  <form id="back_form" method="post">
+  <button id="back_btn" type="submit" formaction="/frontpage"><a>Tilføj flere kager</a></button>
+    </form>
+</div>
 
+<div id="total">
+  <h3>Total: <span th:text="${#ctx.totalPrice + ',-'}"></span></h3>
+  <button id="checkout-btn" type="submit" formaction="/checkout"><a>Gå til betaling</a></button>
 </div>
 
 </body>

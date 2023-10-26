@@ -76,7 +76,7 @@ public class UserController
     {
         // Invalidate session
         ctx.req().getSession().invalidate();
-        ctx.redirect("/");
+        ctx.render("index.html");
     }
 
 

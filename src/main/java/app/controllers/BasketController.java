@@ -45,15 +45,29 @@ public class BasketController {
     }
     public static void removeCupcakeFromBasket(Context ctx){
         Basket basket = ctx.sessionAttribute("userBasket");
-        int id = Integer.parseInt(ctx.pathParam("id"));
+        int id = Integer.parseInt(ctx.formParam("id"));
         basket.removeFromBasket(id);
+        ctx.attribute("basket", basket.getBasket());
+        ctx.attribute("totalPrice", basket.getTotalPrice());
+        ctx.attribute("username", ctx.sessionAttribute("username"));
         ctx.render("basket.html");
 
     }
 
     public static void showBasket(Context ctx){
         Basket basket = ctx.sessionAttribute("userBasket");
+        if (Objects.isNull(basket)){
+            basket = new Basket();
+            ctx.sessionAttribute("userBasket", basket);
+            ctx.attribute("basket", basket.getBasket());
+            ctx.attribute("totalPrice", basket.getTotalPrice());
+
+        } else {
         ctx.attribute("basket", basket.getBasket());
+        ctx.attribute("totalPrice", basket.getTotalPrice());
+        }
+
+        ctx.attribute("username", ctx.sessionAttribute("username"));
         ctx.render("basket.html");
     }
 

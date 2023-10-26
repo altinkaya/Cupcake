@@ -41,8 +41,7 @@ public class Main
         app.post("/addToBasket", ctx -> BasketController.addCupcakeToBasket(ctx, connectionPool));
         app.post("/addtop", ctx -> CupcakeController.addtop(ctx, connectionPool));
         app.post("/addbottom", ctx -> CupcakeController.addbottom(ctx, connectionPool));
-
-
+        app.get("/basket", ctx -> BasketController.showBasket(ctx));
 
         app.get("/createuser", ctx -> ctx.render("createuser.html"));
         app.post("/createuser",ctx -> UserController.createuser(ctx, connectionPool ));

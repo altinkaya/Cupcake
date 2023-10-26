@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cupcake</title>
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<header>
+  <img src="images/cupcakecolorlogo.png" width="100%"/>
+</header>
+
+<div id="nav">
+  <div class="flex-container">
+    <div id="nav-left">
+      <a href="#">Ordrer</a>
+    </div>
+
+    <div id="nav-right">
+      <a href="basket"><img src="images/basket2.png"  height="5%" width="5%"></a>
+      <a th:text="${#ctx.username}"></a>
+      <button id="log-out-btn"><a href="/">Log ud</a></button>
+    </div>
+  </div>
+</div>
+
+</div>
+<div id = 'content'>
+
+
+    <form id="cupcakeBasket" method="post">
+      <table>
+        <thead>
+        <tr>
+          <th>Cupcake</th>
+          <th>Antal</th>
+          <th>Pris</th>
+        <tbody>
+        <tr th:each="cupcake : ${#ctx.basket}">
+          <td th:text="${'Top: ' + cupcake.topFlavor + ' - Bund: ' + cupcake.bottomFlavor} "> </td>
+            <td th:text="${cupcake.amount + ' stk'}"> </td>
+            <td th:text="${cupcake.price + ',-' + '     id:' + cupcake.id}"> </td>
+            <td><button type="submit" formaction="/deleteFromBasket" th:attr="data-id=${cupcake.id}">Fjern fra kurv</button></td>
+
+        </tr>
+        </tbody>
+      </table>
+    </form>
+
+
+</div>
+
+</body>
+</html>

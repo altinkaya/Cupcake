@@ -6,12 +6,15 @@ public class Cupcake {
 
     private int amount;
     private int price;
+    private int id;
+    private static int counter = 0;
 
     public Cupcake(CupcakeTop top, CupcakeBottom bottom, int amount) {
         this.topFlavor = top.getFlavor();
         this.bottomFlavor = bottom.getFlavor();
         this.amount = amount;
         this.price = (top.getPrice() + bottom.getPrice()) * amount;
+        this.id = counter++;
     }
 
     public String getTopFlavor() {
@@ -28,6 +31,10 @@ public class Cupcake {
 
     public int getAmount() {
         return amount;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override

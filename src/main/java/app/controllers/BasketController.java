@@ -49,5 +49,11 @@ public class BasketController {
 
     }
 
+    public static void showBasket(Context ctx){
+        Basket basket = ctx.sessionAttribute("userBasket");
+        ctx.attribute("basket", basket.getBasket());
+        ctx.render("basket.html");
+    }
+
 
 }

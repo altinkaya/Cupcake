@@ -53,6 +53,7 @@ public class CupcakeController {
             ctx.attribute("message", e.getMessage());
             ctx.render("cake.html");
         }
+        ctx.redirect("/cake");
     }
 
 
@@ -68,6 +69,7 @@ public class CupcakeController {
             ctx.attribute("message", e.getMessage());
             ctx.render("cake.html");
         }
+        ctx.redirect("/cake");
     }
 
 

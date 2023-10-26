@@ -50,6 +50,7 @@ public class Main
         app.post("/generateInvoice", ctx -> OrderController.generateInvoice(ctx, connectionPool));
         app.get("/createuser", ctx -> ctx.render("createuser.html"));
         app.post("/createuser",ctx -> UserController.createuser(ctx, connectionPool ));
+        
 
             //låser siden så man kun kan tilgå den med admin retigheder
         app.get("/admin", ctx -> {

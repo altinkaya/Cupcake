@@ -33,15 +33,9 @@
         </div>
     </div>
 </div>
-<h2>Ordrebekræftelse</h2>
-<h3>Ordrenummer: <span th:text="${#ctx.orderId}"></span></h3>
 
-<p>Tak for din bestilling</p>
-
-<div id = 'contentBasket'>
-
-
-    <form id="invoice" method="post">
+<div id = 'orderContent'>
+    <form id="orders" method="post">
         <table>
             <thead>
             <tr>
@@ -50,24 +44,18 @@
                 <th>Pris</th>
 
             <tbody>
-
-            <tr th:each="cupcake : ${#ctx.checkoutBasket}">
+            <tr th:each="cupcake : ${#ctx.orderDetail}">
                 <td>
                     <span th:text="${'Top: ' + cupcake.topFlavor}"></span><br>
                     <span th:text="${'Bund: ' + cupcake.bottomFlavor}"></span>
                 </td>
-                <td th:text="${cupcake.amount + ' stk'}"> </td>
-
+                <td th:text="${cupcake.amount + ' stk.'}"> </td>
                 <td th:text="${cupcake.price + ',-'}"> </td>
             </tr>
             </tbody>
         </table>
     </form>
 </div>
-<form id="checkout-form" method="post">
-    <h3>Total: <span th:text="${#ctx.totalPrice + ',-'}"></span></h3>
-</form>
-
 
 </body>
 </html>

@@ -43,10 +43,12 @@ public class Main
         app.get("/frontpage", ctx -> CupcakeController.dropDowns(ctx, connectionPool));
         app.post("/frontpage", ctx -> CupcakeController.dropDowns(ctx, connectionPool));
         app.post("/addToBasket", ctx -> BasketController.addCupcakeToBasket(ctx, connectionPool));
-
-
+        app.get("/orders", ctx -> OrderController.getOrders(ctx, connectionPool));
+        app.post("/orders", ctx -> OrderController.getOrders(ctx, connectionPool));
+        app.post("/orderDetail", ctx -> OrderController.getOrderDetails(ctx, connectionPool));
 
         app.get("/basket", ctx -> BasketController.showBasket(ctx));
+        app.post("/checkout", ctx -> OrderController.checkout(ctx, connectionPool));
 
         app.post("/deleteFromBasket", ctx -> BasketController.removeCupcakeFromBasket(ctx));
         app.get("/createuser", ctx -> ctx.render("createuser.html"));
@@ -66,7 +68,6 @@ public class Main
         app.post("/update-top", ctx -> AdminController.updateTop(ctx,connectionPool));
         app.get("/edit-bottom/{id}", ctx -> AdminController.editBottom(ctx, connectionPool));
         app.post("/update-bottom", ctx -> AdminController.updateBottom(ctx, connectionPool));
-        app.post("/checkout", ctx -> OrderController.checkout(ctx, connectionPool));
 
     }
 

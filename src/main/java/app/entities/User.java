@@ -8,7 +8,7 @@ public class User {
     private String email;
     private boolean status;
 
-    public User(int id, String name, String password, boolean status) {
+    public User(int id, String name, String password, boolean status, int balance) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -16,10 +16,6 @@ public class User {
         this.status = status;
     }
 
-    public User(String name, int balance) {
-        this.name = name;
-        this.balance = balance;
-    }
 
     public User(int id, String email, int balance) {
         this.id = id;
@@ -68,5 +64,8 @@ public class User {
                 ", balance=" + balance +
                 ", status=" + status +
                 '}';
+    }
+
+    public void setBalance(int i) {
     }
 }

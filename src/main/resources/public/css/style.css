@@ -59,6 +59,48 @@
     padding-bottom: 5px;
 }
 
+#home {
+    background-image: linear-gradient(to bottom right, #915CC1, #3C1460);
+    color: white;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+#home a {
+    color: white;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#orders-btn {
+    background-image: linear-gradient(to bottom right, #915CC1, #3C1460);
+    color: white;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+#orders-btn a {
+    color: white;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#detail-btn {
+    background-image: linear-gradient(to bottom right, #915CC1, #3C1460);
+    color: white;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+#detail-btn a {
+    color: white;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
 #content {
     margin-top: 10px;
     margin-bottom: 10px;

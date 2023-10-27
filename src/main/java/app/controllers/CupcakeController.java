@@ -22,6 +22,8 @@ public class CupcakeController {
             List<CupcakeTop> toplist = new ArrayList<>(topFlavors.values());
             ctx.attribute("topFlavors", toplist);
             ctx.attribute("username", ctx.sessionAttribute("username"));
+            User user = ctx.sessionAttribute("currentUser");
+            ctx.attribute("balance", user.getBalance());
             ctx.render("frontpage.html");
 
 

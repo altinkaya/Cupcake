@@ -15,12 +15,20 @@
 <div id="nav">
   <div class="flex-container">
     <div id="nav-left">
-      <a href="#">Ordrer</a>
+      <form id="home-form" method="post">
+      <button type="submit" id="home" formaction="/frontpage" ><a>Køb kager</a></button>
+      </form>
+      <form id="orders-form" method="post">
+        <button type="submit" id="orders-btn" formaction="/orders" ><a>Ordrer</a></button>
+      </form>
     </div>
 
     <div id="nav-right">
       <a href="basket"><img src="images/basket2.png"  height="5%" width="5%"></a>
+      <a th:text="${'Saldo: ' + #ctx.balance + ',-    '}"></a>
+
       <a th:text="${#ctx.username}"></a>
+
       <form id="logout-form" method="post">
         <button type="submit" id="log-out-btn" formaction="/logout" ><a>Log ud</a></button>
       </form>

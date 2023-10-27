@@ -29,8 +29,9 @@ public class UserMapper
                 if (rs.next())
                 {
                     int id = rs.getInt("id");
+                    int balance = rs.getInt("balance");
                     boolean status = rs.getBoolean("admin");
-                    return new User(id, email, password,status);
+                    return new User(id, email, password,status, balance);
                 } else
                 {
                     throw new DatabaseException("Fejl i login. Prøv igen.");

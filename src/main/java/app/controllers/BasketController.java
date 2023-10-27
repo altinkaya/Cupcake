@@ -1,9 +1,6 @@
 package app.controllers;
 
-import app.entities.Basket;
-import app.entities.Cupcake;
-import app.entities.CupcakeBottom;
-import app.entities.CupcakeTop;
+import app.entities.*;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
 import app.persistence.CupcakeMapper;
@@ -56,6 +53,7 @@ public class BasketController {
 
     public static void showBasket(Context ctx){
         Basket basket = ctx.sessionAttribute("userBasket");
+        User user = ctx.sessionAttribute("currentUser");
         if (Objects.isNull(basket)){
             basket = new Basket();
             ctx.sessionAttribute("userBasket", basket);
@@ -67,6 +65,7 @@ public class BasketController {
         ctx.attribute("totalPrice", basket.getTotalPrice());
         }
 
+        ctx.attribute("balance", user.getBalance());
         ctx.attribute("username", ctx.sessionAttribute("username"));
         ctx.render("basket.html");
     }

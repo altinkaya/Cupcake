@@ -46,10 +46,8 @@ public class Main
         app.get("/orders", ctx -> OrderController.getOrders(ctx, connectionPool));
         app.post("/orders", ctx -> OrderController.getOrders(ctx, connectionPool));
         app.post("/orderDetail", ctx -> OrderController.getOrderDetails(ctx, connectionPool));
-
         app.get("/basket", ctx -> BasketController.showBasket(ctx));
         app.post("/checkout", ctx -> OrderController.checkout(ctx, connectionPool));
-
         app.post("/deleteFromBasket", ctx -> BasketController.removeCupcakeFromBasket(ctx));
         app.get("/createuser", ctx -> ctx.render("createuser.html"));
         app.post("/createuser",ctx -> UserController.createuser(ctx, connectionPool ));

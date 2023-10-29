@@ -59,6 +59,8 @@ public class OrderController {
     public static void getOrders(Context ctx, ConnectionPool connectionPool) throws DatabaseException {
         User user = ctx.sessionAttribute("currentUser");
         List<Order> orders = OrderMapper.getOrders(user.getId(), connectionPool);
+        ctx.attribute("username", ctx.sessionAttribute("username"));
+        ctx.attribute("balance", user.getBalance());
         ctx.attribute("orders", orders);
         ctx.render("orders.html");
     }
@@ -68,6 +70,9 @@ public class OrderController {
 
         List<Cupcake> orderDetail = OrderMapper.getOrderDetails(orderNr, connectionPool);
         ctx.attribute("orderDetail", orderDetail);
+        ctx.attribute("username", ctx.sessionAttribute("username"));
+        User user = ctx.sessionAttribute("currentUser");
+        ctx.attribute("balance", user.getBalance());
         ctx.render("orderDetail.html");
     }
 }

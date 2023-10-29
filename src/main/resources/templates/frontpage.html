@@ -24,9 +24,8 @@
     </div>
 
     <div id="nav-right">
-      <a href="basket"><img src="images/basket2.png"  height="5%" width="5%"></a>
+      <a class="basket" href="basket"><img src="images/basket2.png"></a>
       <a th:text="${'Saldo: ' + #ctx.balance + ',-    '}"></a>
-
       <a th:text="${#ctx.username}"></a>
 
       <form id="logout-form" method="post">
@@ -45,17 +44,20 @@
   </div>
 
   <form id="dropdowns"  method="post">
-    <select name="bottom" id="bottom">
+    <select required name="bottom" id="bottom">
+      <option value="" >Vælg bund</option>
       <option th:each="bottom : ${#ctx.bottomFlavors}" th:value="${bottom.id}"
               th:text="${bottom.flavor + ' ' + bottom.price + ',-'}"></option>
     </select>
 
-    <select name="top" id="top">
+    <select required name="top" id="top">
+      <option value="" >Vælg top</option>
       <option th:each="top : ${#ctx.topFlavors}" th:value="${top.id}"
               th:text="${top.flavor + ' ' + top.price + ',-'}"></option>
     </select>
 
-    <select name="amount" id="amount">
+    <select required name="amount" id="amount">
+      <option value="" >Vælg antal</option>
       <option value="1">1 stk</option>
       <option value="2">2 stk</option>
       <option value="3">3 stk</option>

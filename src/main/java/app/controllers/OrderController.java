@@ -12,11 +12,6 @@ import java.util.Map;
 
 public class OrderController {
 
-    private ConnectionPool connectionPool;
-
-    public OrderController(ConnectionPool connectionPool) {
-        this.connectionPool = connectionPool;
-    }
 
     public static void checkout(Context ctx, ConnectionPool connectionPool) throws DatabaseException {
         List<Cupcake> chekoutBasket;

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="da">
+<head>
+  <img src="images/cupcakecolorlogo.png" alt="logo" width="100%">
+  <title>Admin - Olsker Cupcakes</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+  <div id="nav">
+    <ul class="admin-menu">
+      <li><a href="/users">Bruger</a></li>
+      <li><a href="/cake">Kager</a></li>
+      <li><a href="/users_admin">Ordre</a></li>
+      <span th:text="${#ctx.username}" style="color: grey; margin-right: 10px;"></span>
+      <form id="logout-form" method="post">
+        <button type="submit" id="log-out-btn" formaction="/logout" ><a>Log ud</a></button>
+      </form>
+    </ul>
+  </div>
+  <div class="indhold-box" id="content">
+    <h1>Brugere og Ordrer</h1>
+    <table id="sortable-table">
+      <thead>
+      <tr>
+        <th onclick="sortTable(0)">ID</th>
+        <th onclick="sortTable(1)">Email</th>
+        <th onclick="sortTable(2)">Balance</th>
+        <th onclick="sortTable(3)">Ordre Nr</th>
+        <th onclick="sortTable(4)">Ordre Status</th>
+        <th onclick="sortTable(5)">Ordre Pris</th>
+        <th onclick="sortTable(6)">Handling</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="entry : ${usersAndOrders}">
+        <td th:text="${entry.key.id}"></td>
+        <td th:text="${entry.key.name}"></td>
+        <td th:text="${entry.key.balance}"></td>
+        <td>
+          <table>
+            <tr th:each="order : ${entry.value}">
+              <td th:text="${order.orderNr}"></td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <table>
+            <tr th:each="order : ${entry.value}">
+              <td th:text="${order.status}"></td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <table>
+            <tr th:each="order : ${entry.value}">
+              <td th:text="${order.price}"></td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <form th:each="order : ${entry.value}" th:object="${order}" method="post" th:action="@{'/edit_order/' + ${order.orderNr}}">
+            <button type="submit">Slet order</button>
+          </form>
+        </td>
+        <td>
+          <form th:each="order : ${entry.value}" th:object="${order}" method="post" th:action="@{'/delete_order/' + ${order.orderNr}}">
+            <button type="submit">Slet order</button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+  function sortTable(columnIndex) {
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("sortable-table");
+    switching = true;
+
+    while (switching) {
+      switching = false;
+      rows = table.rows;
+
+      for (i = 1; i < (rows.length - 1); i++) {
+        shouldSwitch = false;
+        x = rows[i].getElementsByTagName("td")[columnIndex];
+        y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          shouldSwitch = true;
+          break;
+        }
+      }
+
+      if (shouldSwitch) {
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+      }
+    }
+  }
+</script>
+</body>
+</html>

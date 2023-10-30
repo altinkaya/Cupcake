@@ -96,4 +96,24 @@ public class OrderMapper {
             throw new RuntimeException(e);
         }
     }
+
+    public static void deleteOrder(int orderNr, ConnectionPool connectionPool) throws DatabaseException {
+
+        String sql = "DELETE FROM orders WHERE order_nr = ?";
+
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, orderNr);
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 1) {
+                throw new DatabaseException("Fejl i sletning af ordre");
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Fejl i sletning af ordre");
+        }
+    }
+
+
+
 }

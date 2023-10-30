@@ -273,4 +273,23 @@ th {
     padding: 10px 20px 10px 20px;
 }
 
+ table {
+     border-collapse: collapse;
+     width: 100%;
+ }
+
+th, td {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+    cursor: pointer; /* Tilføj en cursor-stil for at vise, at kolonnerne er klikbare */
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
 

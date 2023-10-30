@@ -9,6 +9,7 @@ import app.entities.*;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
 import app.persistence.CupcakeMapper;
+import app.persistence.OrderMapper;
 import app.persistence.UserMapper;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
@@ -66,6 +67,14 @@ public class Main
         app.post("/update-top", ctx -> AdminController.updateTop(ctx,connectionPool));
         app.get("/edit-bottom/{id}", ctx -> AdminController.editBottom(ctx, connectionPool));
         app.post("/update-bottom", ctx -> AdminController.updateBottom(ctx, connectionPool));
+        app.get("/admin_orders", ctx -> AdminController.getOrders(ctx, connectionPool));
+
+        app.post("/orderedit_admin", ctx -> AdminController.getOrderDetails(ctx, connectionPool));
+
+        app.get("/users_admin", ctx -> AdminController.getUsersAndOrders(ctx, connectionPool));
+        app.post("/delete_order/{orderNr}", ctx -> {AdminController.deleteorders(ctx, connectionPool);});
+
+
 
     }
 

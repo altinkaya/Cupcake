@@ -23,6 +23,13 @@ public class User {
         this.balance = balance;
     }
 
+    public User(int id, String name, boolean status, int balance) {
+        this.id = id;
+        this.name = name;
+        this.status = status;
+        this.balance = balance;
+    }
+
     public int getId() {
         return id;
     }

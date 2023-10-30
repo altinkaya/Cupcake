@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html lang="da">
 <head>
     <img src="images/cupcakecolorlogo.png" alt="logo" width="100%">
     <title>Login - Olsker Cupcakes</title>
@@ -11,8 +11,8 @@
     <div id="nav">
         <ul class="admin-menu">
             <li><a href="/users">Bruger</a></li>
-            <li><a href="#kager">Kager</a></li>
-            <li><a href="#ordre">Ordre</a></li>
+            <li><a href="/cake">Kager</a></li>
+            <li><a href="/users_admin">Ordre</a></li>
             <span th:text="${#ctx.username}" style="color: grey; margin-right: 10px;"></span>
             <form id="logout-form" method="post">
                 <button type="submit" id="log-out-btn" formaction="/logout" ><a>Log ud</a></button>

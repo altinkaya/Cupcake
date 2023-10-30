@@ -2,33 +2,99 @@
 
 title Domain Model
 
-Main -down-> UserMapper
+class Main
 Main -down-> UserController
+Main -down-> OrderController
+Main -down-> CupcakeController
+Main -down-> AdminController
+Main -down-> BasketController
 Main -down-> ThymeleafConfig
-Main -down-> ConnectionPool
-Main -down-> DatabaseException
+
+
+AdminController --|> AdminMapper
+AdminController --|> UserMapper
+AdminController --|> ConnectionPool
+AdminController --|> DatabaseException
+AdminController --|> CupcakeTop
+AdminController --|> CupcakeBottom
+AdminController --|> Order
+AdminController --|> OrderDetails
+
+BasketController --|> BasketMapper
+BasketController --|> DatabaseException
+BasketController --|> CupcakeMapper
+BasketController --|> CupcakeTop
+BasketController --|> CupcakeBottom
+BasketController --|> Basket
+BasketController --|> ConnectionPool
+
+CupcakeController --|> CupcakeMapper
+CupcakeController --|> DatabaseException
+CupcakeController --|> CupcakeTop
+CupcakeController --|> CupcakeBottom
+CupcakeController --|> ConnectionPool
+
 
 UserController --|> UserMapper
-UserController --|> Orders
+UserController --|> ConnectionPool
+UserController --|> DatabaseException
 
-Orders --|> OrderDetails
-Orders --|> User
 
-Orders --|> CupcakeTop
-Orders --|> CupcakeBottom
+OrderController --|> OrderMapper
+OrderController --|> OrderDetails
+OrderController --|> Basket
+OrderController --|> User
+OrderController --|> UserMapper
+OrderController --|> Cupcake
+OrderController --|> ConnectionPool
+OrderController --|> DatabaseException
 
-UserController -up-> User
+AdminMapper --|> Order
+AdminMapper --|> OrderDetails
+AdminMapper --|> User
+AdminMapper --|> ConnectionPool
+
+CupcakeMapper --|> CupcakeTop
+CupcakeMapper --|> CupcakeBottom
+CupcakeMapper --|> ConnectionPool
+
+OrderMapper --|> Order
+OrderMapper --|> ConnectionPool
+OrderMapper --|> Cupcake
+OrderMapper --|> OrderDetails
+
+UserMapper --|> ConnectionPool
+UserMapper --|> DatabaseException
+UserMapper --|> User
+
+
+Cupcake --|> CupcakeTop
+Cupcake --|> CupcakeBottom
+
+Basket --|> Cupcake
+
 
 class UserMapper
+class AdminMapper
+class CupcakeMapper
+class OrderMapper
 class ConnectionPool
 class DatabaseException
 class User
 class UserController
+class AdminController
+class BasketController
+class CupcakeController
+class OrderController
 class ThymeleafConfig
-class Orders
+class Order
 class OrderDetails
 class CupcakeTop
 class CupcakeBottom
+class Basket
+class Cupcake
+
+
 
 
 @enduml

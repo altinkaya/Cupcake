@@ -58,25 +58,26 @@
             <td th:text="${cupcake.amount + ' stk'}"> </td>
 
             <td th:text="${cupcake.price + ',-'}"> </td>
-            <td><button type="submit" name="id" formaction="/deleteFromBasket" th:value="${cupcake.id}">Fjern fra kurv</button></td>
+            <td style="box-shadow: none;" ><button  id="delete-btn" type="submit" name="id" formaction="/deleteFromBasket" th:value="${cupcake.id}">Fjern fra kurv</button></td>
         </tr>
         </tbody>
       </table>
+      <div id="back">
+        <form id="back_form" method="post">
+          <button id="back_btn" type="submit" formaction="/frontpage"><a>Tilføj flere kager</a></button>
+        </form>
+      </div>
     </form>
+
+
+  <div id="total">
+  <form id="checkout-form" method="post">
+    <h3>Total: <span th:text="${#ctx.totalPrice + ',-'}"></span></h3>
+    <button id="checkout-btn" type="submit" formaction="/checkout"><a>Betal</a></button>
+  </form>
+  </div>
 </div>
 
-<div id="back">
-  <form id="back_form" method="post">
-  <button id="back_btn" type="submit" formaction="/frontpage"><a>Tilføj flere kager</a></button>
-    </form>
-</div>
-
-<div id="total">
-<form id="checkout-form" method="post">
-  <h3>Total: <span th:text="${#ctx.totalPrice + ',-'}"></span></h3>
-  <button id="checkout-btn" type="submit" formaction="/checkout"><a>Betal</a></button>
-</form>
-</div>
 
 </body>
 </html>

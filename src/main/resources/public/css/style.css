@@ -99,6 +99,10 @@
     padding-bottom: 5px;
 }
 
+#orders-btn:hover {
+    background-image: linear-gradient(to bottom right, #3C1460, #915CC1);
+}
+
 #detail-btn {
     background-image: linear-gradient(to bottom right, #915CC1, #3C1460);
     color: white;
@@ -236,7 +240,6 @@ h2 {
     border-radius: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
-    /
 }
 
 #cupcake-txt {
@@ -274,22 +277,66 @@ th {
 }
 
  table {
-     border-collapse: collapse;
      width: 100%;
+     margin-top: 20px;
  }
 
 th, td {
-    border: 1px solid #ddd;
-    text-align: left;
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
     padding: 8px;
+    text-align: left;
 }
-
+/*
 th {
     background-color: #f2f2f2;
-    cursor: pointer; /* Tilføj en cursor-stil for at vise, at kolonnerne er klikbare */
+    cursor: pointer; /* Tilføj en cursor-stil for at vise, at kolonnerne er klikbare
 }
+
 
 tr:hover {
     background-color: #f5f5f5;
 }
+*/
 
+#back_btn {
+    background-image: linear-gradient(to bottom right, #915CC1, #3C1460);
+    display: flex;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 5px;
+    padding: 10px 20px 10px 20px;
+    margin-top: 20px;
+}
+
+#back_btn:hover {
+    background-image: linear-gradient(to bottom right, #3C1460, #915CC1);
+}
+
+#checkout-btn {
+    background-image: linear-gradient(to bottom right, #915CC1, #3C1460);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 5px;
+    padding: 10px 50px 10px 50px;
+}
+
+#checkout-btn:hover {
+    background-image: linear-gradient(to bottom right, #3C1460, #915CC1);
+}
+
+#total {
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 175px;
+    padding-left: 175px;
+    text-align: center;
+}

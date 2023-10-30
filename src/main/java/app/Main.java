@@ -68,13 +68,10 @@ public class Main
         app.get("/edit-bottom/{id}", ctx -> AdminController.editBottom(ctx, connectionPool));
         app.post("/update-bottom", ctx -> AdminController.updateBottom(ctx, connectionPool));
         app.get("/admin_orders", ctx -> AdminController.getOrders(ctx, connectionPool));
-
         app.post("/orderedit_admin", ctx -> AdminController.getOrderDetails(ctx, connectionPool));
-
         app.get("/users_admin", ctx -> AdminController.getUsersAndOrders(ctx, connectionPool));
         app.get("/delete_order/", ctx -> {AdminController.deleteorders(ctx, connectionPool);});
         app.post("/delete_order/", ctx -> {AdminController.deleteorders(ctx, connectionPool);});
-
         app.post("/adminorderdetail/{orderNr}", ctx -> AdminController.getOrderDetails(ctx, connectionPool));
         app.get("/adminorderdetail/{orderNr}", ctx -> AdminController.getOrderDetails(ctx, connectionPool));
 

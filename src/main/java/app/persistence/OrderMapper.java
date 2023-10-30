@@ -98,12 +98,11 @@ public class OrderMapper {
     }
 
     public static void deleteOrder(int orderNr, ConnectionPool connectionPool) throws DatabaseException {
-
-        String sql = "DELETE FROM orders WHERE order_nr = ?";
-
+        String sql ="WITH deleted_rows AS (DELETE FROM ordersdetails WHERE order_nr = ?) DELETE FROM orders WHERE order_nr = ?";
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, orderNr);
+            ps.setInt(2, orderNr);
 
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected != 1) {

@@ -62,10 +62,8 @@ public class OrderController {
 
     public static void getOrderDetails(Context ctx, ConnectionPool connectionPool) throws DatabaseException {
         int orderNr = Integer.parseInt(ctx.formParam("orderNr"));
-
         List<Cupcake> orderDetail = OrderMapper.getOrderDetails(orderNr, connectionPool);
         ctx.attribute("orderDetail", orderDetail);
-
         ctx.attribute("username", ctx.sessionAttribute("username"));
         User user = ctx.sessionAttribute("currentUser");
         ctx.attribute("balance", user.getBalance());

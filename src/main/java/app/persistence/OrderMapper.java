@@ -107,7 +107,7 @@ public class OrderMapper {
 
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected != 1) {
-                throw new DatabaseException("Fejl i sletning af ordre");
+                throw new DatabaseException("sletning af ordre");
             }
         } catch (SQLException e) {
             throw new DatabaseException("Fejl i sletning af ordre");

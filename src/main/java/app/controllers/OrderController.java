@@ -65,6 +65,7 @@ public class OrderController {
 
         List<Cupcake> orderDetail = OrderMapper.getOrderDetails(orderNr, connectionPool);
         ctx.attribute("orderDetail", orderDetail);
+
         ctx.attribute("username", ctx.sessionAttribute("username"));
         User user = ctx.sessionAttribute("currentUser");
         ctx.attribute("balance", user.getBalance());

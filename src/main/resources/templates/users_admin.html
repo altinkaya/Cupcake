@@ -62,15 +62,9 @@
           </table>
         </td>
         <td>
-          <form th:each="order : ${entry.value}" th:object="${order}" method="post" th:action="@{'/edit_order/' + ${order.orderNr}}">
-            <button type="submit">Slet order</button>
+          <form th:each="order : ${entry.value}" th:object="${order}" method="post" th:action="@{'/adminorderdetail/' + ${order.orderNr}}">
+            <button type="submit">Se order</button>
           </form>
-        </td>
-        <td>
-          <form th:each="order : ${entry.value}" th:object="${order}" method="post" th:action="@{'/delete_order/' + ${order.orderNr}}">
-            <button type="submit">Slet order</button>
-          </form>
-        </td>
       </tr>
       </tbody>
     </table>

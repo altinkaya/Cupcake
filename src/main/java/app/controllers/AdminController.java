@@ -4,6 +4,7 @@ import app.entities.*;
 import app.exceptions.DatabaseException;
 import app.persistence.*;
 import io.javalin.http.Context;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -160,23 +161,6 @@ public class AdminController {
         }
     }
 
-    public static void getOrderDetails(Context ctx, ConnectionPool connectionPool) throws DatabaseException {
-
-        Boolean loggedIn = ctx.sessionAttribute("status");
-        if (loggedIn != null && loggedIn) {
-            int orderNr = Integer.parseInt(ctx.formParam("orderNr"));
-
-            List<Cupcake> orderDetail = AdminMapper.getOrderDetails(orderNr, connectionPool);
-            ctx.attribute("orderDetail", orderDetail);
-            ctx.attribute("username", ctx.sessionAttribute("username"));
-            User user = ctx.sessionAttribute("currentUser");
-            ctx.attribute("balance", user.getBalance());
-            ctx.render("orderedit_admin.html");
-        } else {
-            ctx.redirect("/");
-        }
-    }
-
     public static void getUsersAndOrders(Context ctx, ConnectionPool connectionPool) throws DatabaseException {
 
         Boolean loggedIn = ctx.sessionAttribute("status");
@@ -204,11 +188,31 @@ public class AdminController {
 
 
     public static void deleteorders(Context ctx, ConnectionPool connectionPool) throws DatabaseException {
-        int orderNr = Integer.parseInt(ctx.pathParam("orderNr"));
+        int orderNr = ctx.sessionAttribute("orderNr");
                 OrderMapper.deleteOrder(orderNr,connectionPool);
                 ctx.redirect("/users_admin");
 
     }
+
+    public static void getOrderDetails(Context ctx, ConnectionPool connectionPool) throws DatabaseException {
+
+        Boolean loggedIn = ctx.sessionAttribute("status");
+        if (loggedIn != null && loggedIn) {
+            int orderNr = Integer.parseInt(ctx.pathParam("orderNr"));
+
+            List<Cupcake> orderDetail = AdminMapper.getOrderDetails(orderNr, connectionPool);
+            ctx.sessionAttribute("orderNr",orderNr);
+            ctx.attribute("orderDetail", orderDetail);
+            ctx.attribute("username", ctx.sessionAttribute("username"));
+            User user = ctx.sessionAttribute("currentUser");
+            ctx.attribute("balance", user.getBalance());
+            ctx.render("adminorderdetail.html");
+        } else {
+            ctx.redirect("/");
+        }
+    }
+
+
 
 
 

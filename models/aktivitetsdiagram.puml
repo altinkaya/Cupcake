@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+|Kunde|
+start
+:Gå til hjemmeside;
+:indtast brugeroplysninger;
+|Website|
+repeat
+repeat while (brugeroplysninger true?) is (no)
+-> yes;
+:Login;
+|Kunde|
+:Bestil cupcakes;
+|Website|
+:Opret og gem ordre;
+:Vis ordrebekræftelse;
+fork
+|Kunde|
+:Ordrebekræftet]
+:Gå til butik;
+fork again
+|Butik|
+:Bag cupcakes;
+:Cupckaes]
+:Gør cupcakes klar til afhentning;
+end fork
+:afhent cupcakes;
+
+
+
+
+
+
+
+
+
+stop
+
+@enduml

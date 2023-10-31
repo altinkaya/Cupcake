@@ -2,8 +2,7 @@
 Title Cupcake Projekt
 
 State index
-State adminorderdetail
-State cake
+
 State createuser
 
 
@@ -18,26 +17,29 @@ index --> LoggedOnAdmin
 
 
 state LoggedOnAdmin {
+state admin
 state user_admin
-state order_admin
-state orderedit_admin
-    [*] --> user_admin
-    user_admin --> order_admin
-    order_admin --> orderedit_admin
-    orderedit_admin --> order_admin : edit order
+state cake
+state users
+State adminorderdetail
+
+admin --> users
+admin --> cake
+admin --> user_admin
+user_admin --> adminorderdetail
+
 
 
 }
 
 state LoggedOnUser {
- state users
+
  state frontpage
  State orderdetail
  State orders
  state basket
  state checkout
- [*] --> users
- users --> frontpage
+
  frontpage --> basket
  basket --> frontpage : edit basket
  frontpage --> orders

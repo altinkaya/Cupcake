@@ -5,8 +5,7 @@ State index
 State adminorderdetail
 State cake
 State createuser
-State orderdetail
-State orders
+
 
 [*] --> index
 index --> index : user or pw not OK
@@ -33,12 +32,17 @@ state orderedit_admin
 state LoggedOnUser {
  state users
  state frontpage
+ State orderdetail
+ State orders
  state basket
  state checkout
  [*] --> users
  users --> frontpage
  frontpage --> basket
  basket --> frontpage : edit basket
+ frontpage --> orders
+ orders --> frontpage
+ orders --> orderdetail
  basket --> basket : not enough money
  basket --> checkout
  checkout --> [*]

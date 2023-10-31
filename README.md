@@ -51,14 +51,7 @@ Rapporten skal afleveres i pdf-format og ligges i en separat folder ved navn "ra
 Info om prøveeksamen følger.
 
 
-Ressourcer
-Her kan I finde rapportskabelonen. Medtag de artefakter I finder relevante (og realistiske at medtage):
 
-Rapportskabelon
-Gruppekontrakt
-UI stuff
-Mockup. Det er desværre kun forsiden vi har fået udleveret og det er okay at ændre layoutet.
-Headergrafik
 The Bottoms
 Bottom	Price
 Chocolate	5.00

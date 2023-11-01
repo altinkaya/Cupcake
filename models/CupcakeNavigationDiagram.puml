@@ -23,10 +23,10 @@ state cake
 state users
 State adminorderdetail
 
-admin --> users
-admin --> cake
-admin --> user_admin
-user_admin --> adminorderdetail
+admin --> users: give money to user
+admin --> cake: crude on cake
+admin --> user_admin: se users and orders
+user_admin --> adminorderdetail: se orderdetail and delete orders
 
 
 
@@ -47,6 +47,11 @@ state LoggedOnUser {
  orders --> orderdetail
  basket --> basket : not enough money
  basket --> checkout
- checkout --> [*]
+
 }
+  LoggedOnUser --> [*] : logout
+  LoggedOnAdmin--> [*] : logout
+
+
+
 @enduml

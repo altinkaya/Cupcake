@@ -1,5 +1,11 @@
 GRUPPE G
 
+- Mustafa Altinkaya - altinkaya
+- Mounir Salem - ETHMUNI
+- Morten Bomholt Mikkelsen - mbm1337
+
+
+
 
 Baggrund
 Vi har landet en vigtig opgave fra Olsker Cupcakes. Det er endnu et dybdeøkologisk iværksættereventyr fra Bornholm, som har ramt den helt rigtige opskrift.
